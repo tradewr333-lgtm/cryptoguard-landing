@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CryptoGuard — O Antivírus da Web3</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060a06;
+    --surface: #0a110a;
+    --green: #00ff88;
+    --green2: #00cc6a;
+    --red: #ff3366;
+    --orange: #ff6b35;
+    --yellow: #ffd700;
+    --text: #e8f5e8;
+    --muted: #3a5a3a;
+    --border: rgba(0,255,136,0.12);
+    --glow: 0 0 40px rgba(0,255,136,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; justify-content:space-between; align-items:center;
+    padding: 18px 48px;
+    background: rgba(6,10,6,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex; align-items:center; gap:10px;
+    font-size: 1.2rem; font-weight: 800; letter-spacing:2px; color: var(--green);
+  }
+
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.8rem; letter-spacing:2px; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--green); }
+
+  .nav-cta {
+    background: var(--green); color:#000;
+    padding: 10px 24px; font-weight:800; font-size:0.8rem;
+    letter-spacing:2px; text-decoration:none;
+    clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background:#00ffaa; transform:scale(1.03); }
+
+  /* HERO */
+  .hero {
+    position: relative; z-index:1;
+    min-height: 100vh;
+    display: flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    text-align:center;
+    padding: 120px 40px 80px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items:center; gap:8px;
+    border: 1px solid rgba(0,255,136,0.3);
+    padding: 6px 16px; font-size:0.65rem; letter-spacing:3px;
+    color:var(--green); margin-bottom:32px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-size: clamp(3rem,8vw,6.5rem);
+    font-weight: 800; line-height:1; letter-spacing:-2px;
+    margin-bottom:24px;
+  }
+
+  .h1-white  { color:#fff; display:block; }
+  .h1-green  {
+    color:var(--green); display:block;
+    text-shadow: 0 0 80px rgba(0,255,136,0.5);
+  }
+
+  .hero-desc {
+    font-size: clamp(1rem,2vw,1.15rem);
+    color:var(--muted); max-width:540px;
+    line-height:1.7; margin-bottom:48px;
+    font-family:'DM Mono',monospace; font-weight:400;
+  }
+
+  .hero-desc strong { color:var(--green); }
+
+  .cta-row { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:60px; }
+
+  .btn-primary {
+    background:var(--green); color:#000;
+    padding:16px 36px; font-weight:800; font-size:0.9rem;
+    letter-spacing:2px; text-decoration:none;
+    clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
+    transition:all 0.2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary:hover { background:#00ffaa; transform:scale(1.03); box-shadow:0 0 40px rgba(0,255,136,0.4); }
+
+  .btn-ghost {
+    border:1px solid var(--border); color:var(--muted);
+    padding:16px 36px; font-size:0.85rem; text-decoration:none;
+    transition:all 0.2s; letter-spacing:1px;
+  }
+  .btn-ghost:hover { border-color:var(--green); color:var(--green); }
+
+  /* THREAT TICKER */
+  .threat-ticker {
+    position:relative; z-index:1;
+    background: rgba(255,51,102,0.05);
+    border-top:1px solid rgba(255,51,102,0.2);
+    border-bottom:1px solid rgba(255,51,102,0.2);
+    overflow:hidden; padding:10px 0;
+  }
+
+  .ticker-inner {
+    display:flex; gap:48px;
+    animation: ticker 25s linear infinite;
+    white-space:nowrap;
+  }
+
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  .tick {
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'DM Mono',monospace; font-size:0.72rem;
+  }
+
+  .tick-red    { color:var(--red); }
+  .tick-orange { color:var(--orange); }
+  .tick-muted  { color:var(--muted); }
+
+  /* SECTION */
+  .section { position:relative; z-index:1; padding:100px 48px; max-width:1200px; margin:0 auto; }
+
+  .label {
+    font-family:'DM Mono',monospace; font-size:0.65rem;
+    letter-spacing:4px; color:var(--green); margin-bottom:12px;
+  }
+
+  .section-h {
+    font-size:clamp(2rem,4vw,3.2rem); font-weight:800;
+    line-height:1.1; margin-bottom:16px;
+  }
+
+  .section-p {
+    color:var(--muted); font-family:'DM Mono',monospace;
+    font-size:0.9rem; max-width:500px; line-height:1.8;
+    margin-bottom:56px;
+  }
+
+  /* FEATURES */
+  .features {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:2px;
+  }
+
+  .feat {
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:36px; position:relative; overflow:hidden;
+    transition:all 0.3s;
+  }
+
+  .feat::after {
+    content:''; position:absolute;
+    top:0;left:0;right:0; height:2px;
+    background:linear-gradient(90deg,transparent,var(--green),transparent);
+    transform:scaleX(0); transition:transform 0.3s;
+  }
+
+  .feat:hover::after { transform:scaleX(1); }
+  .feat:hover { border-color:rgba(0,255,136,0.25); }
+
+  .feat-icon { font-size:2rem; margin-bottom:18px; }
+  .feat-title { font-size:1rem; font-weight:800; color:var(--green); margin-bottom:10px; letter-spacing:1px; }
+  .feat-desc { font-family:'DM Mono',monospace; font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
+  /* THREAT DEMO */
+  .demo-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+
+  .threat-card {
+    background:var(--surface); border:1px solid rgba(255,51,102,0.3);
+    padding:22px; border-radius:4px;
+    box-shadow:0 0 30px rgba(255,51,102,0.1);
+    margin-bottom:12px;
+  }
+
+  .threat-card:last-child { margin-bottom:0; }
+
+  .tc-top { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+
+  .tc-badge {
+    font-family:'DM Mono',monospace; font-size:9px; font-weight:700;
+    padding:3px 8px; letter-spacing:2px;
+  }
+  .tc-critical { background:var(--red); color:#fff; }
+  .tc-high     { background:var(--orange); color:#fff; }
+  .tc-medium   { background:var(--yellow); color:#000; }
+
+  .tc-msg  { color:#fff; font-size:13px; font-weight:700; }
+  .tc-desc { color:rgba(255,255,255,0.4); font-family:'DM Mono',monospace; font-size:11px; line-height:1.5; }
+
+  /* PRICING */
+  .pricing-wrap {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:2px; max-width:800px; margin:60px auto 0;
+  }
+
+  .price-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:40px; position:relative; transition:all 0.3s;
+  }
+
+  .price-card.featured {
+    border-color:var(--green);
+    box-shadow:0 0 50px rgba(0,255,136,0.1);
+  }
+
+  .feat-tag {
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background:var(--green); color:#000; font-size:0.6rem; font-weight:800;
+    padding:4px 16px; letter-spacing:3px;
+    clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  }
+
+  .plan-name { font-size:0.7rem; letter-spacing:3px; color:var(--muted); margin-bottom:16px; }
+  .plan-price { font-size:3rem; font-weight:800; color:#fff; line-height:1; }
+  .plan-price sub { font-size:1rem; color:var(--muted); font-weight:400; }
+  .plan-desc { font-family:'DM Mono',monospace; font-size:0.82rem; color:var(--muted); margin:14px 0 24px; line-height:1.5; }
+
+  .plan-feats { list-style:none; display:grid; gap:10px; margin-bottom:28px; }
+  .plan-feats li { font-family:'DM Mono',monospace; font-size:0.8rem; color:var(--text); display:flex; align-items:center; gap:8px; }
+  .plan-feats li::before { content:'▶'; font-size:0.5rem; color:var(--green); flex-shrink:0; }
+  .plan-feats li.off { color:var(--muted); text-decoration:line-through; }
+  .plan-feats li.off::before { color:var(--muted); }
+
+  .plan-btn {
+    display:block; text-align:center; text-decoration:none;
+    padding:13px; font-size:0.78rem; font-weight:800; letter-spacing:2px;
+    transition:all 0.2s;
+    clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  }
+
+  .plan-btn-solid { background:var(--green); color:#000; }
+  .plan-btn-solid:hover { background:#00ffaa; }
+  .plan-btn-ghost { border:1px solid var(--border); color:var(--muted); clip-path:none; }
+  .plan-btn-ghost:hover { border-color:var(--green); color:var(--green); }
+
+  /* STATS */
+  .stats-row {
+    position:relative; z-index:1;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    display:flex; justify-content:center;
+  }
+
+  .stat { padding:48px 64px; text-align:center; border-right:1px solid var(--border); }
+  .stat:last-child { border-right:none; }
+  .stat-num { font-size:2.8rem; font-weight:800; color:var(--green); text-shadow:var(--glow); display:block; }
+  .stat-lbl { font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:3px; color:var(--muted); margin-top:6px; display:block; }
+
+  /* FOOTER */
+  footer {
+    position:relative; z-index:1;
+    border-top:1px solid var(--border);
+    padding:32px 48px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  }
+
+  .footer-logo { font-size:1rem; font-weight:800; letter-spacing:2px; color:var(--green); }
+  .footer-text { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--muted); }
+
+  @media(max-width:768px) {
+    nav { padding:16px 20px; }
+    .nav-links { display:none; }
+    .section { padding:60px 20px; }
+    .demo-grid { grid-template-columns:1fr; }
+    .pricing-wrap { grid-template-columns:1fr; }
+    .stats-row { flex-direction:column; }
+    .stat { border-right:none; border-bottom:1px solid var(--border); padding:32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+      <path d="M16 2L3 8v8c0 8 5.9 15.5 13 17.5C23.1 31.5 29 24 29 16V8L16 2z"
+            fill="rgba(0,255,136,0.15)" stroke="#00ff88" stroke-width="1.5"/>
+      <path d="M11 16l3.5 3.5L21 13" stroke="#00ff88" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    CRYPTOGUARD
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Como Funciona</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Instalar Grátis →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="pulse">●</span>
+    PROTEÇÃO EM TEMPO REAL — WEB3 SECURITY
+  </div>
+  <h1>
+    <span class="h1-white">O ANTIVÍRUS</span>
+    <span class="h1-green">DA WEB3</span>
+  </h1>
+  <p class="hero-desc">
+    Antes de conectar sua carteira, o CryptoGuard já sabe se o site é <strong>phishing</strong>,
+    se o contrato é um <strong>honeypot</strong> e se a aprovação vai
+    <strong>drenar sua carteira</strong>.
+  </p>
+  <div class="cta-row">
+    <a href="#" class="btn-primary">🛡️ Instalar no Chrome — Grátis</a>
+    <a href="#" class="btn-ghost">Ver Como Funciona</a>
+  </div>
+</section>
+
+<!-- THREAT TICKER -->
+<div class="threat-ticker">
+  <div class="ticker-inner">
+    <span class="tick"><span class="tick-red">🚨 BLOQUEADO</span> <span class="tick-muted">uniswap-app.com — phishing confirmado</span></span>
+    <span class="tick"><span class="tick-red">🍯 HONEYPOT</span> <span class="tick-muted">0x4f2a... — taxa de venda 99%</span></span>
+    <span class="tick"><span class="tick-orange">⚠️ APROVAÇÃO INFINITA</span> <span class="tick-muted">USDC — spender desconhecido</span></span>
+    <span class="tick"><span class="tick-red">🚨 BLOQUEADO</span> <span class="tick-muted">metamask-io.com — imitação detectada</span></span>
+    <span class="tick"><span class="tick-orange">⚠️ OWNER OCULTO</span> <span class="tick-muted">0x9c1b... — pode rugpull</span></span>
+    <span class="tick"><span class="tick-red">🚨 BLOQUEADO</span> <span class="tick-muted">openseas.io — typosquatting</span></span>
+    <!-- duplicate for loop -->
+    <span class="tick"><span class="tick-red">🚨 BLOQUEADO</span> <span class="tick-muted">uniswap-app.com — phishing confirmado</span></span>
+    <span class="tick"><span class="tick-red">🍯 HONEYPOT</span> <span class="tick-muted">0x4f2a... — taxa de venda 99%</span></span>
+    <span class="tick"><span class="tick-orange">⚠️ APROVAÇÃO INFINITA</span> <span class="tick-muted">USDC — spender desconhecido</span></span>
+    <span class="tick"><span class="tick-red">🚨 BLOQUEADO</span> <span class="tick-muted">metamask-io.com — imitação detectada</span></span>
+    <span class="tick"><span class="tick-orange">⚠️ OWNER OCULTO</span> <span class="tick-muted">0x9c1b... — pode rugpull</span></span>
+    <span class="tick"><span class="tick-red">🚨 BLOQUEADO</span> <span class="tick-muted">openseas.io — typosquatting</span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat"><span class="stat-num">48k+</span><span class="stat-lbl">Sites Bloqueados</span></div>
+  <div class="stat"><span class="stat-num">12k+</span><span class="stat-lbl">Honeypots Detectados</span></div>
+  <div class="stat"><span class="stat-num">$2.4M</span><span class="stat-lbl">Protegidos em 30 dias</span></div>
+  <div class="stat"><span class="stat-num">< 50ms</span><span class="stat-lbl">Tempo de Análise</span></div>
+</div>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="label">// O que detectamos</div>
+  <h2 class="section-h">4 Camadas de<br>Proteção</h2>
+  <p class="section-p">Cada interação Web3 passa por 4 verificações automáticas antes de você confirmar qualquer coisa.</p>
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon">🎣</div>
+      <div class="feat-title">Anti-Phishing</div>
+      <div class="feat-desc">Detecta sites falsos de MetaMask, Uniswap, OpenSea e 200+ protocolos. Blacklist atualizada em tempo real com dados do PhishFort e CryptoScamDB.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🍯</div>
+      <div class="feat-title">Detector de Honeypot</div>
+      <div class="feat-desc">Analisa o contrato via GoPlus Security antes de você comprar. Detecta tokens que deixam comprar mas bloqueiam a venda. Taxa de acerto >95%.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🔓</div>
+      <div class="feat-title">Bloqueador de Aprovações</div>
+      <div class="feat-desc">Avisa quando você está dando permissão infinita para um contrato gastar seus tokens. Sugere limitar ao valor necessário antes de confirmar.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🚫</div>
+      <div class="feat-title">Blacklist de Scammers</div>
+      <div class="feat-desc">Base de dados com endereços de wallets e contratos conhecidos por drains, rugpulls e exploits. Atualizada diariamente pela comunidade.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO THREATS -->
+<section class="section" style="padding-top:0;">
+  <div class="demo-grid">
+    <div>
+      <div class="label">// Alertas reais</div>
+      <h2 class="section-h">O que você<br>vai ver</h2>
+      <p class="section-p">Alertas claros, diretos e acionáveis. Sem jargão técnico — qualquer iniciante entende o risco.</p>
+    </div>
+    <div>
+      <div class="threat-card">
+        <div class="tc-top">
+          <span class="tc-badge tc-critical">CRITICAL</span>
+          <span class="tc-msg">🚨 Site de Phishing Confirmado</span>
+        </div>
+        <div class="tc-desc">uniswap-app.com está na blacklist de scams crypto. Este site não é o Uniswap real. Não conecte sua carteira.</div>
+      </div>
+      <div class="threat-card">
+        <div class="tc-top">
+          <span class="tc-badge tc-critical">CRITICAL</span>
+          <span class="tc-msg">🍯 HONEYPOT DETECTADO</span>
+        </div>
+        <div class="tc-desc">Você pode comprar mas NÃO conseguirá vender. Taxa de venda: 99%. Armadilha confirmada pela GoPlus Security.</div>
+      </div>
+      <div class="threat-card">
+        <div class="tc-top">
+          <span class="tc-badge tc-high">HIGH</span>
+          <span class="tc-msg">⚠️ Aprovação Infinita de USDC</span>
+        </div>
+        <div class="tc-desc">Você está dando permissão ilimitada para este contrato gastar seus USDC. Se for hackeado, você perde tudo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" style="padding-top:0; text-align:center;">
+  <div class="label" style="text-align:center;">// Pricing</div>
+  <h2 class="section-h">Simples e Direto</h2>
+  <div class="pricing-wrap">
+    <div class="price-card">
+      <div class="plan-name">FREE</div>
+      <div class="plan-price">$0 <sub>/mês</sub></div>
+      <div class="plan-desc">Para conhecer o produto.</div>
+      <ul class="plan-feats">
+        <li>Anti-phishing básico</li>
+        <li>Blacklist pública</li>
+        <li>5 análises de contrato/dia</li>
+        <li class="off">Detector de honeypot</li>
+        <li class="off">Aprovações avançadas</li>
+        <li class="off">Alertas em tempo real</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-ghost">Instalar Grátis</a>
+    </div>
+    <div class="price-card featured">
+      <div class="feat-tag">RECOMENDADO</div>
+      <div class="plan-name">PRO</div>
+      <div class="plan-price">$9 <sub>/mês</sub></div>
+      <div class="plan-desc">Proteção completa. O custo de um café por mês pode te salvar de perder tudo.</div>
+      <ul class="plan-feats">
+        <li>Tudo do Free</li>
+        <li>Detector de honeypot (GoPlus)</li>
+        <li>Análises ilimitadas de contrato</li>
+        <li>Bloqueador de aprovações infinitas</li>
+        <li>Alertas em tempo real</li>
+        <li>Blacklist premium atualizada</li>
+      </ul>
+      <a href="#" class="plan-btn plan-btn-solid">Assinar PRO — $9/mês</a>
+    </div>
+  </div>
+  <p style="font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--muted); margin-top:24px;">
+    Cancele quando quiser. Pagamento via cartão ou crypto.
+  </p>
+</section>
+
+<footer>
+  <div class="footer-logo">🛡️ CRYPTOGUARD</div>
+  <div class="footer-text">© 2025 CryptoGuard — O Antivírus da Web3</div>
+  <div style="display:flex;gap:20px;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);">
+    <a href="#" style="color:inherit;text-decoration:none;">Chrome Store</a>
+    <a href="#" style="color:inherit;text-decoration:none;">Privacidade</a>
+    <a href="#" style="color:inherit;text-decoration:none;">Contato</a>
+  </div>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe('pk_live_51T3bDzLYcvGWEVUxMaURZjseJUycPdhNP1Z9oAuE3kwnYEr1ni8mhYY3A6lTCX5XE9bRi2265tPEdVzF8Sr2MKlW00w6yByJV2');
+
+  // Botões de assinar — redirecionam para checkout do backend
+  document.querySelectorAll('a[href="#"]').forEach(btn => {
+    if (btn.textContent.includes('PRO') || btn.textContent.includes('Assinar')) {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        // Redireciona para página de cadastro/checkout
+        window.location.href = 'https://cryptoguard.site/checkout';
+      });
+    }
+  });
+</script>
+</body>
+</html>
