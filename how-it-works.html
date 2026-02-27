@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — SHIELD CryptoGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020804;
+  --metal-dark: #0a1a0a;
+  --green: #00ff88;
+  --green-glow: rgba(0,255,136,0.4);
+  --silver: #8ab88a;
+  --silver2: #c8e8c8;
+  --red: #ff2244;
+  --orange: #ff6600;
+  --yellow: #ffd700;
+  --border: rgba(0,255,136,0.15);
+  --border2: rgba(0,255,136,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: #c8e8c8;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  pointer-events: none;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 64px;
+  background: rgba(2,8,4,0.95);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-decoration: none;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+.nav-back {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  color: var(--silver); text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 8px 20px; transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-back:hover { color: var(--green); border-color: var(--green); }
+
+main {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto;
+  padding: 120px 48px 80px;
+}
+
+/* HEADER */
+.doc-header { margin-bottom: 64px; }
+.doc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 4px;
+  color: var(--green); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.doc-tag::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+.doc-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900; color: var(--silver2);
+  margin-bottom: 12px; line-height: 1.1;
+}
+.doc-title span { color: var(--green); }
+.doc-meta {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; color: rgba(200,232,200,0.3);
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+
+/* INTRO BOX */
+.intro-box {
+  background: rgba(0,255,136,0.03);
+  border: 1px solid rgba(0,255,136,0.18);
+  border-left: 3px solid var(--green);
+  padding: 28px 32px;
+  margin-bottom: 48px;
+}
+.intro-box p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.82rem; line-height: 1.95;
+  color: rgba(200,232,200,0.65);
+  margin-bottom: 16px;
+}
+.intro-box p:last-child { margin-bottom: 0; }
+.intro-box strong { color: var(--green); }
+.intro-box em { color: var(--silver2); font-style: normal; }
+
+/* ARCHITECTURE FLOW */
+.flow-section {
+  margin-bottom: 56px;
+}
+.flow-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 4px;
+  color: var(--green); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.flow-title::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+
+.flow-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+.flow-step {
+  background: var(--metal-dark);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 24px; align-items: start;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.flow-step::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, transparent, var(--green), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.flow-step:hover::before { opacity: 1; }
+.flow-step:hover { border-color: rgba(0,255,136,0.25); background: #0d1f0d; }
+
+.flow-step::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  opacity: 0.15;
+}
+
+.step-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem; font-weight: 900;
+  color: rgba(0,255,136,0.15);
+  line-height: 1;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.step-body {}
+.step-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 4px;
+  color: rgba(0,255,136,0.4); margin-bottom: 8px;
+}
+.step-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 2px;
+  color: var(--green); margin-bottom: 12px;
+}
+.step-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.85;
+  color: rgba(200,232,200,0.45);
+}
+.step-desc strong { color: rgba(200,232,200,0.75); }
+
+/* THREAT TAXONOMY */
+.threat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin-bottom: 56px;
+}
+
+.threat-card {
+  background: var(--metal-dark);
+  border: 1px solid var(--border);
+  padding: 28px 30px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.threat-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  transition: opacity 0.3s; opacity: 0.7;
+}
+.threat-card.critical::before { background: var(--red); box-shadow: 0 0 10px var(--red); }
+.threat-card.high::before { background: var(--orange); box-shadow: 0 0 10px var(--orange); }
+.threat-card.medium::before { background: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+.threat-card.info::before { background: var(--green); box-shadow: 0 0 10px var(--green); }
+
+.threat-card:hover { border-color: rgba(0,255,136,0.2); background: #0d1f0d; }
+
+.threat-severity {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.5rem; font-weight: 700; letter-spacing: 3px;
+  padding: 3px 10px; display: inline-block;
+  margin-bottom: 14px;
+}
+.sev-critical { background: var(--red); color: #fff; }
+.sev-high { background: var(--orange); color: #fff; }
+.sev-medium { background: var(--yellow); color: #000; }
+.sev-info { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
+
+.threat-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--silver2); margin-bottom: 10px; letter-spacing: 1px;
+}
+.threat-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.76rem; line-height: 1.75;
+  color: rgba(200,232,200,0.4);
+}
+.threat-desc strong { color: rgba(200,232,200,0.7); }
+
+/* AI ENGINE SECTION */
+.engine-box {
+  background: var(--metal-dark);
+  border: 1px solid var(--border2);
+  padding: 40px;
+  position: relative; overflow: hidden;
+  margin-bottom: 56px;
+}
+.engine-box::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.engine-box::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,136,0.3), transparent);
+}
+
+.engine-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem; letter-spacing: 4px; color: var(--green);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.engine-title::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+
+.engine-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-bottom: 28px;
+}
+.engine-stat {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.3);
+  position: relative;
+}
+.engine-stat-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--green);
+  text-shadow: 0 0 20px var(--green-glow);
+  display: block; margin-bottom: 6px;
+}
+.engine-stat-lbl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 2px;
+  color: var(--silver);
+}
+
+.engine-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.9;
+  color: rgba(200,232,200,0.45);
+  margin-bottom: 14px;
+}
+.engine-desc:last-child { margin-bottom: 0; }
+.engine-desc strong { color: var(--silver2); }
+
+/* LIVE FEED SIMULATION */
+.feed-section { margin-bottom: 56px; }
+.feed-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem; letter-spacing: 4px; color: var(--green);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.feed-title::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+
+.feed-terminal {
+  background: #010601;
+  border: 1px solid rgba(0,255,136,0.2);
+  padding: 28px 32px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  position: relative; overflow: hidden;
+}
+.feed-terminal::before {
+  content: '● SHIELD AI ENGINE — LIVE THREAT LOG';
+  font-family: 'Orbitron', monospace;
+  font-size: 0.55rem; letter-spacing: 3px;
+  color: rgba(0,255,136,0.4);
+  display: block; margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,255,136,0.1);
+}
+
+.log-line {
+  display: flex; gap: 16px; align-items: flex-start;
+  margin-bottom: 10px; line-height: 1.5;
+}
+.log-time { color: rgba(0,255,136,0.3); flex-shrink: 0; font-size: 0.68rem; }
+.log-level { flex-shrink: 0; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; }
+.ll-crit { background: rgba(255,34,68,0.15); color: var(--red); border: 1px solid rgba(255,34,68,0.3); }
+.ll-high { background: rgba(255,102,0,0.1); color: var(--orange); border: 1px solid rgba(255,102,0,0.3); }
+.ll-warn { background: rgba(255,215,0,0.08); color: var(--yellow); border: 1px solid rgba(255,215,0,0.2); }
+.ll-ok   { background: rgba(0,255,136,0.06); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+.log-msg { color: rgba(200,232,200,0.5); }
+.log-msg span { color: rgba(200,232,200,0.85); }
+
+/* CTA */
+.cta-box {
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,255,136,0.02));
+  border: 1px solid var(--green);
+  padding: 48px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-box::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.cta-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 900; color: var(--silver2);
+  margin-bottom: 12px;
+}
+.cta-title span { color: var(--green); }
+.cta-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; color: rgba(200,232,200,0.4);
+  margin-bottom: 32px; line-height: 1.7;
+}
+.btn-primary {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, #00ff88, #00cc6a);
+  color: #000; text-decoration: none;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.3s; display: inline-block;
+  box-shadow: 0 0 30px rgba(0,255,136,0.3);
+}
+.btn-primary:hover { box-shadow: 0 0 60px rgba(0,255,136,0.6); transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(2,8,4,0.8);
+}
+.footer-logo { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; letter-spacing:3px; color:var(--green); text-shadow:0 0 20px var(--green-glow); }
+.footer-text { font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:rgba(200,232,200,0.2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 28 32" fill="none">
+      <defs><linearGradient id="ng4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4dff9f"/><stop offset="100%" stop-color="#00cc6a"/></linearGradient></defs>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" fill="url(#ng4)" opacity="0.12"/>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" stroke="url(#ng4)" stroke-width="1.5" fill="none"/>
+      <path d="M9 16l3.5 3.5L19 12" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    SHIELD CRYPTOGUARD
+  </a>
+  <a href="/" class="nav-back">← BACK TO SITE</a>
+</nav>
+
+<main>
+
+  <div class="doc-header">
+    <div class="doc-tag">// TECHNICAL DOCUMENTATION</div>
+    <h1 class="doc-title">How <span>SHIELD</span> Works</h1>
+    <div class="doc-meta">SHIELD CRYPTOGUARD AI ENGINE — ARCHITECTURE & THREAT INTELLIGENCE</div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <p>
+      <strong>SHIELD CryptoGuard is not a static blocklist.</strong> It is a continuously evolving AI-driven security layer that sits between your browser and the Web3 ecosystem — scanning, classifying, and intercepting threats before they reach your wallet. Every URL you visit, every contract address you encounter, every token approval you are about to sign passes through SHIELD's multi-layer analysis engine in under 50 milliseconds.
+    </p>
+    <p>
+      The Web3 threat landscape is unlike anything in traditional cybersecurity. Attackers here are not script kiddies running commodity malware — they are sophisticated actors deploying <strong>custom EVM bytecode, flash loan cascades, re-entrancy exploits, and social engineering campaigns</strong> engineered specifically to drain wallets at scale. A phishing site targeting MetaMask users can go from registration to active attack in under 6 minutes. A honeypot token can be deployed, marketed, and rug-pulled within a single Ethereum block. <em>SHIELD was built to operate at the speed of this threat environment.</em>
+    </p>
+    <p>
+      Our engine ingests threat signals from across the on-chain and off-chain world, correlates them through a classification AI, and delivers verdicts in real time — directly inside your browser, with zero friction and no wallet connection required.
+    </p>
+  </div>
+
+  <!-- ARCHITECTURE FLOW -->
+  <div class="flow-section">
+    <div class="flow-title">// DETECTION PIPELINE — 5-LAYER ARCHITECTURE</div>
+    <div class="flow-steps">
+
+      <div class="flow-step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-label">LAYER 1 — INGESTION</div>
+          <div class="step-title">REAL-TIME SIGNAL COLLECTION</div>
+          <div class="step-desc">
+            The moment your browser navigates to a Web3-related URL, SHIELD's content script activates. It extracts the domain, any embedded contract addresses, wallet connection requests, and token approval parameters — all without ever leaving your browser tab. <strong>No data is sent to SHIELD servers unless a threat query is required.</strong> The extension operates locally first, matching against a compressed local cache of the most current blacklist entries. Cache refresh occurs automatically every few hours via a signed, encrypted pull from SHIELD's threat intelligence backend.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-label">LAYER 2 — CLASSIFICATION AI</div>
+          <div class="step-title">MULTI-VECTOR THREAT SCORING</div>
+          <div class="step-desc">
+            Each extracted signal is fed into SHIELD's classification engine, which evaluates multiple threat vectors simultaneously. For domains, the engine examines <strong>registration age, DNS records, SSL certificate provenance, typosquatting similarity scores against 300+ legitimate DeFi domains,</strong> and historical abuse reports. For contract addresses, the engine dispatches a query to on-chain security analysis infrastructure, retrieving bytecode-level risk flags including: ownership renouncement status, proxy upgrade patterns, hidden mint functions, blacklist mechanisms embedded in transfer logic, and liquidity lock verification. The entire scoring pipeline completes in under 50ms for cached results and under 800ms for cold queries.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-label">LAYER 3 — APPROVAL INTERCEPTION</div>
+          <div class="step-title">TRANSACTION FIREWALL</div>
+          <div class="step-desc">
+            When your wallet is about to sign a transaction, SHIELD intercepts the approval request and decodes its parameters before any signature is broadcast. <strong>Infinite approvals</strong> — where a spender is granted unlimited access to an ERC-20 token balance — are flagged immediately and SHIELD prompts you to approve only the exact amount required for the transaction. <strong>Permit2 signatures, EIP-712 typed data approvals, and SetApprovalForAll calls</strong> (common vectors in NFT drain attacks) are each individually classified and presented to you in plain language before you sign. This layer alone prevents the majority of wallet drain incidents, which predominantly rely on users approving unlimited token spend to malicious contracts.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-label">LAYER 4 — BLACKLIST INTELLIGENCE</div>
+          <div class="step-title">DYNAMIC THREAT DATABASE</div>
+          <div class="step-desc">
+            SHIELD maintains a continuously updated threat database spanning <strong>phishing domains, scam contract addresses, known drainer wallet addresses, rugpull deployer EOAs, and malicious token pairs.</strong> This database is not static — it is a living dataset fed by automated on-chain monitoring that scans newly deployed contracts, tracks deployer wallet histories, and flags addresses that exhibit known attack patterns such as bundled liquidity removal, coordinated sell-wall drops, and cross-chain bridge exploit signatures. New entries propagate to all active SHIELD instances within minutes of detection. <strong>The database currently covers Ethereum, BNB Chain, Polygon, Arbitrum, Base, and Avalanche.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <div class="step-label">LAYER 5 — VERDICT & ALERT</div>
+          <div class="step-title">CLEAR-LANGUAGE USER ALERT</div>
+          <div class="step-desc">
+            SHIELD does not output raw risk scores or technical flags. Every threat verdict is translated into <strong>plain, actionable language</strong> — with a severity classification (CRITICAL, HIGH, MEDIUM, or INFORMATIONAL), a one-sentence summary of the specific risk, and a recommended action. Alerts appear as non-intrusive overlays within the browser, never redirecting you or breaking your workflow. For CRITICAL threats, SHIELD activates a full-screen blocking overlay that requires explicit acknowledgment before any wallet interaction is permitted to proceed.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- THREAT TAXONOMY -->
+  <div class="flow-title">// THREAT TAXONOMY — WHAT SHIELD DETECTS</div>
+  <div class="threat-grid">
+
+    <div class="threat-card critical">
+      <div class="threat-severity sev-critical">CRITICAL</div>
+      <div class="threat-name">PHISHING & DOMAIN SPOOFING</div>
+      <div class="threat-desc">
+        Fake protocol frontends engineered to steal seed phrases or trick users into signing malicious transactions. Common vectors include <strong>IDN homograph attacks</strong> (e.g., uniswаp.org using Cyrillic 'а'), subdomain hijacking, and pixel-perfect UI clones of MetaMask, Ledger Live, and major DEX interfaces. SHIELD detects these via domain similarity scoring, SSL anomaly detection, and known-bad infrastructure fingerprinting.
+      </div>
+    </div>
+
+    <div class="threat-card critical">
+      <div class="threat-severity sev-critical">CRITICAL</div>
+      <div class="threat-name">HONEYPOT CONTRACTS</div>
+      <div class="threat-desc">
+        Tokens engineered to allow unrestricted buying while preventing any sell transaction from succeeding. Implemented via <strong>hidden transfer restrictions in bytecode, owner-only sell whitelist modifiers, dynamic tax functions that return 100% on non-whitelisted callers,</strong> and fake liquidity locks that expire within hours. SHIELD's contract analyzer queries on-chain simulation results to verify whether a sell transaction would succeed before you buy.
+      </div>
+    </div>
+
+    <div class="threat-card high">
+      <div class="threat-severity sev-high">HIGH</div>
+      <div class="threat-name">INFINITE APPROVAL DRAINERS</div>
+      <div class="threat-desc">
+        The most prevalent wallet drain vector in DeFi. Attackers deploy contracts that request <strong>unlimited ERC-20 spend approval</strong> under the guise of legitimate DeFi interactions — staking, bridging, or claiming airdrops. Once approved, the drainer contract can empty the victim's token balance at any future time, even months later. SHIELD intercepts every approval transaction and surfaces the exact spend limit being requested before your wallet signs.
+      </div>
+    </div>
+
+    <div class="threat-card high">
+      <div class="threat-severity sev-high">HIGH</div>
+      <div class="threat-name">RUGPULL DETECTION</div>
+      <div class="threat-desc">
+        Projects that raise capital via token sales or liquidity provision, then execute a coordinated exit by removing all liquidity and dumping team allocations. SHIELD monitors <strong>deployer wallet history, vesting contract integrity, liquidity lock expiry, admin key concentration, and upgrade proxy patterns</strong> that indicate an owner can unilaterally drain the protocol treasury or mint unlimited tokens. Rugpull risk scores are surfaced before you interact with any new token or protocol.
+      </div>
+    </div>
+
+    <div class="threat-card medium">
+      <div class="threat-severity sev-medium">MEDIUM</div>
+      <div class="threat-name">MALICIOUS AIRDROP TOKENS</div>
+      <div class="threat-desc">
+        Unsolicited tokens airdropped to wallets designed to lure holders to a phishing site to "claim" additional rewards or "sell" the airdropped balance. Interacting with the claim contract typically results in a <strong>SetApprovalForAll drain or a seed phrase harvesting page.</strong> SHIELD flags unknown tokens that appear in your wallet with no prior interaction history and that link to recently registered domains.
+      </div>
+    </div>
+
+    <div class="threat-card medium">
+      <div class="threat-severity sev-medium">MEDIUM</div>
+      <div class="threat-name">ADDRESS POISONING</div>
+      <div class="threat-desc">
+        Attackers send zero-value transactions from <strong>vanity addresses that mimic the first and last characters of addresses you've previously interacted with,</strong> contaminating your transaction history. When you copy-paste a recent address from your wallet history, you may paste the poisoned address instead of the legitimate one, sending funds to the attacker. SHIELD detects address similarity patterns and warns you before any outbound transfer.
+      </div>
+    </div>
+
+    <div class="threat-card info">
+      <div class="threat-severity sev-info">INFORMATIONAL</div>
+      <div class="threat-name">UNVERIFIED CONTRACTS</div>
+      <div class="threat-desc">
+        Smart contracts whose source code has not been verified on a public block explorer. While not inherently malicious, <strong>unverified bytecode cannot be audited by the community</strong> and represents elevated risk — particularly for contracts requesting fund custody, token approvals, or NFT minting authority. SHIELD surfaces this flag to help you make an informed decision before interacting.
+      </div>
+    </div>
+
+    <div class="threat-card info">
+      <div class="threat-severity sev-info">INFORMATIONAL</div>
+      <div class="threat-name">HIGH-TAX TOKEN MECHANICS</div>
+      <div class="threat-desc">
+        Tokens with buy/sell taxes above 10% are flagged for review. While not always malicious, <strong>high-tax mechanics are frequently used to fund team wallets, suppress selling pressure, or implement slow-drain mechanics</strong> that gradually extract value from holders. SHIELD displays the effective tax rate derived from on-chain simulation so you know the true cost of any swap before executing.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AI ENGINE -->
+  <div class="engine-box">
+    <div class="engine-title">// SHIELD AI ENGINE — CONTINUOUS LEARNING INFRASTRUCTURE</div>
+    <div class="engine-grid">
+      <div class="engine-stat">
+        <span class="engine-stat-num">&lt;50ms</span>
+        <span class="engine-stat-lbl">CACHED VERDICT TIME</span>
+      </div>
+      <div class="engine-stat">
+        <span class="engine-stat-num">6h</span>
+        <span class="engine-stat-lbl">MAX BLACKLIST REFRESH</span>
+      </div>
+      <div class="engine-stat">
+        <span class="engine-stat-num">6</span>
+        <span class="engine-stat-lbl">EVM CHAINS COVERED</span>
+      </div>
+    </div>
+    <p class="engine-desc">
+      SHIELD's AI engine does not rely on a single static dataset. It operates as a <strong>continuously updating threat intelligence system</strong> that monitors newly deployed smart contracts across all covered EVM chains, tracks the on-chain behavior of flagged deployer addresses, and correlates off-chain signals — including newly registered domains targeting DeFi keywords, SSL certificates issued for protocol-lookalike domains, and social media reports of active scam campaigns — into a unified threat graph.
+    </p>
+    <p class="engine-desc">
+      When a new attack pattern emerges — a novel drainer contract architecture, a new phishing kit variant, a flash loan exploit signature — SHIELD's detection logic is updated and propagated to all active extension instances without requiring a manual update from the Chrome Web Store. This <strong>over-the-air intelligence update system</strong> is what separates SHIELD from conventional blocklist-based browser extensions, which can lag days or weeks behind active threats.
+    </p>
+    <p class="engine-desc">
+      The classification engine employs <strong>behavioral heuristics alongside signature-based matching.</strong> A contract that has never been explicitly flagged can still receive a high-risk score if its bytecode exhibits structural patterns associated with known drainer families, if its deployer wallet has previously deployed contracts that were later flagged, or if its liquidity profile matches the early-stage fingerprint of historical rugpulls. This proactive approach allows SHIELD to warn users about threats that have not yet been publicly reported.
+    </p>
+  </div>
+
+  <!-- LIVE LOG SIMULATION -->
+  <div class="feed-section">
+    <div class="feed-title">// SHIELD ENGINE — SAMPLE THREAT LOG OUTPUT</div>
+    <div class="feed-terminal">
+      <div class="log-line">
+        <span class="log-time">14:02:07</span>
+        <span class="log-level ll-crit">CRITICAL</span>
+        <span class="log-msg">PHISHING — <span>uniswap-exchange.app</span> matched IDN homograph pattern. Domain age: 3 days. SSL: Let's Encrypt (self-issued). Blocking wallet connection.</span>
+      </div>
+      <div class="log-line">
+        <span class="log-time">14:02:31</span>
+        <span class="log-level ll-crit">CRITICAL</span>
+        <span class="log-msg">HONEYPOT — <span>0x4f2a...c819</span> sell simulation failed. Tax on sell: 99%. Owner can modify tax: YES. Liquidity locked: NO. Do not buy.</span>
+      </div>
+      <div class="log-line">
+        <span class="log-time">14:03:14</span>
+        <span class="log-level ll-high">HIGH</span>
+        <span class="log-msg">APPROVAL — <span>USDC infinite spend</span> requested by 0x9c1b...f302. Spender unverified. Recommend: limit approval to transaction amount only.</span>
+      </div>
+      <div class="log-line">
+        <span class="log-time">14:04:02</span>
+        <span class="log-level ll-high">HIGH</span>
+        <span class="log-msg">RUGPULL RISK — <span>0xe7a3...1190</span> deployer previously deployed 4 flagged contracts. Liquidity unlocks in 6h. Admin key not renounced.</span>
+      </div>
+      <div class="log-line">
+        <span class="log-time">14:04:45</span>
+        <span class="log-level ll-warn">MEDIUM</span>
+        <span class="log-msg">AIRDROP TOKEN — <span>$CLAIMREWARD</span> in wallet with no prior interaction. Links to domain registered 11 days ago. Possible drainer lure.</span>
+      </div>
+      <div class="log-line">
+        <span class="log-time">14:05:18</span>
+        <span class="log-level ll-ok">CLEAR</span>
+        <span class="log-msg">Contract <span>0x1f98...0000 (Uniswap V3 Router)</span> verified. Source audited. No anomalies detected. Interaction permitted.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-title">Your Wallet Deserves a <span>Real Shield</span></div>
+    <div class="cta-sub">
+      Install SHIELD CryptoGuard and let the AI engine watch every Web3 interaction before your wallet signs anything.<br>
+      Free tier available. PRO Shield includes unlimited contract analysis and real-time alerts.
+    </div>
+    <a href="https://buy.stripe.com/8x25kEcqicQg3bmdBY7N601" class="btn-primary">🛡 ACTIVATE PRO SHIELD — 7 DAYS FREE</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
+  <div class="footer-text">© 2026 Edutech Wise FZCO — United Arab Emirates</div>
+  <div class="footer-text">Web3 Antivirus — How It Works</div>
+</footer>
+
+</body>
+</html>
