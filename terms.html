@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — SHIELD CryptoGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020804;
+  --metal-dark: #0a1a0a;
+  --green: #00ff88;
+  --green-glow: rgba(0,255,136,0.4);
+  --silver: #8ab88a;
+  --silver2: #c8e8c8;
+  --border: rgba(0,255,136,0.15);
+  --border2: rgba(0,255,136,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: #c8e8c8;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 64px;
+  background: rgba(2,8,4,0.95);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-decoration: none;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+.nav-back {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  color: var(--silver); text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 8px 20px;
+  transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-back:hover { color: var(--green); border-color: var(--green); }
+
+/* MAIN */
+main {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto;
+  padding: 120px 48px 80px;
+}
+
+/* HEADER */
+.doc-header { margin-bottom: 60px; }
+.doc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 4px;
+  color: var(--green); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.doc-tag::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+.doc-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900; color: var(--silver2);
+  margin-bottom: 12px; line-height: 1.1;
+}
+.doc-title span { color: var(--green); }
+.doc-meta {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; color: rgba(200,232,200,0.3);
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+
+/* WARNING BOX */
+.warning-box {
+  background: rgba(255,34,68,0.05);
+  border: 1px solid rgba(255,34,68,0.25);
+  border-left: 3px solid #ff2244;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+  position: relative;
+}
+.warning-box::before {
+  content: '⚠ BETA PRODUCT NOTICE';
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 3px;
+  color: #ff2244; display: block; margin-bottom: 12px;
+}
+.warning-box p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.8;
+  color: rgba(200,232,200,0.55);
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: 48px;
+  border: 1px solid var(--border);
+  background: var(--metal-dark);
+  padding: 32px 36px;
+  position: relative;
+}
+.section::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.section-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 4px;
+  color: rgba(0,255,136,0.3); margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 2px;
+  color: var(--green); margin-bottom: 18px;
+}
+.section p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.9;
+  color: rgba(200,232,200,0.5);
+  margin-bottom: 14px;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong {
+  color: var(--silver2); font-weight: 600;
+}
+.section ul {
+  list-style: none; margin: 12px 0 14px 0;
+}
+.section ul li {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.77rem; line-height: 1.8;
+  color: rgba(200,232,200,0.45);
+  padding-left: 20px; position: relative;
+  margin-bottom: 6px;
+}
+.section ul li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--green); font-size: 0.6rem;
+}
+
+/* CAPS NOTICE */
+.caps-notice {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 1px; line-height: 1.8;
+  color: rgba(200,232,200,0.6);
+  background: rgba(0,255,136,0.03);
+  border: 1px solid rgba(0,255,136,0.1);
+  padding: 20px 24px;
+  margin-bottom: 48px;
+}
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(2,8,4,0.8);
+}
+.footer-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.72rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-shadow: 0 0 20px var(--green-glow);
+}
+.footer-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; color: rgba(200,232,200,0.2);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 28 32" fill="none">
+      <defs><linearGradient id="ng2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4dff9f"/><stop offset="100%" stop-color="#00cc6a"/></linearGradient></defs>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" fill="url(#ng2)" opacity="0.12"/>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" stroke="url(#ng2)" stroke-width="1.5" fill="none"/>
+      <path d="M9 16l3.5 3.5L19 12" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    SHIELD CRYPTOGUARD
+  </a>
+  <a href="/" class="nav-back">← BACK TO SITE</a>
+</nav>
+
+<main>
+  <div class="doc-header">
+    <div class="doc-tag">// LEGAL DOCUMENT</div>
+    <h1 class="doc-title">Terms of <span>Service</span></h1>
+    <div class="doc-meta">LAST UPDATED: FEBRUARY 2026 — VERSION 1.0</div>
+    <div class="doc-meta">SHIELD CRYPTOGUARD — EDUTECH WISE FZCO — UNITED ARAB EMIRATES</div>
+  </div>
+
+  <div class="warning-box">
+    <p>SHIELD CryptoGuard is currently in <strong>public beta</strong>. This means the product is still under active development and may contain limitations, inaccuracies, or incomplete threat coverage. By using this extension, you acknowledge and accept the experimental nature of this software and agree to the terms set forth below.</p>
+  </div>
+
+  <div class="caps-notice">
+    BY INSTALLING OR USING SHIELD CRYPTOGUARD, YOU CONFIRM THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS OF SERVICE. IF YOU DO NOT AGREE, DO NOT USE THIS PRODUCT.
+  </div>
+
+  <div class="section">
+    <div class="section-num">01 — PARTIES & JURISDICTION</div>
+    <div class="section-title">About This Agreement</div>
+    <p>These Terms of Service ("Terms") constitute a binding agreement between you ("User", "you") and <strong>Edutech Wise FZCO</strong>, a company incorporated under the laws of the <strong>United Arab Emirates</strong>, operating the SHIELD CryptoGuard browser extension and associated services under the brand <strong>SHIELD CryptoGuard — Web3 Antivirus</strong> ("Company", "we", "us", "our").</p>
+    <p>These Terms govern your access to and use of the SHIELD CryptoGuard browser extension, website at cryptoguard.site, backend APIs, and any related services (collectively, the "Service"). By installing the extension or accessing the website, you agree to be bound by these Terms.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02 — BETA STATUS & EXPERIMENTAL NATURE</div>
+    <div class="section-title">This Is a Beta Product</div>
+    <p>SHIELD CryptoGuard is an <strong>experimental, beta-stage product</strong> currently under active development. The Service is provided on an "as is" and "as available" basis without warranties of any kind, express or implied.</p>
+    <p>You expressly acknowledge and accept that:</p>
+    <ul>
+      <li>The extension may not detect all threats, phishing sites, honeypot contracts, or malicious approvals present in the Web3 ecosystem;</li>
+      <li>Threat databases and detection algorithms may be incomplete, outdated, or inaccurate at any given time;</li>
+      <li>New attack vectors, scam techniques, and exploit methods emerge continuously and may not be covered by the current version;</li>
+      <li>The Service reduces — but does not eliminate — the broad spectrum of risks involved in interacting with Web3 protocols;</li>
+      <li>No security tool, including SHIELD CryptoGuard, can guarantee 100% protection against all possible threats in the decentralized ecosystem.</li>
+    </ul>
+    <p>The Company makes no claim or representation that use of SHIELD CryptoGuard will prevent financial loss, theft of digital assets, or any other harm resulting from interactions with blockchain networks, smart contracts, or decentralized applications.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03 — WEB3 RISKS & USER RESPONSIBILITY</div>
+    <div class="section-title">Inherent Risks of Web3 Interaction</div>
+    <p>Interacting with Web3 protocols, decentralized finance ("DeFi") platforms, non-fungible token ("NFT") marketplaces, smart contracts, and blockchain networks involves <strong>substantial and inherent risks</strong> that extend far beyond those that SHIELD CryptoGuard is designed to detect or alert.</p>
+    <p>These risks include, but are not limited to:</p>
+    <ul>
+      <li>Smart contract vulnerabilities, bugs, and exploits that may result in total loss of funds;</li>
+      <li>Liquidity risks, impermanent loss, and protocol insolvency;</li>
+      <li>Regulatory uncertainty and legal changes affecting digital asset ownership and usage;</li>
+      <li>Market volatility, price manipulation, and pump-and-dump schemes;</li>
+      <li>Bridge exploits, oracle manipulation, and flash loan attacks;</li>
+      <li>Private key compromise, seed phrase theft, and social engineering attacks;</li>
+      <li>Network congestion, failed transactions, and irreversible on-chain actions;</li>
+      <li>Rug pulls, exit scams, and malicious project abandonment;</li>
+      <li>Any other risk inherent to the decentralized, permissionless nature of blockchain technology.</li>
+    </ul>
+    <p>You are <strong>solely and exclusively responsible</strong> for conducting your own due diligence before interacting with any Web3 protocol, connecting your wallet to any platform, approving any smart contract transaction, or investing in any digital asset. SHIELD CryptoGuard is a supplemental risk-mitigation tool, not a substitute for your own judgment and research.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04 — LIMITATION OF LIABILITY</div>
+    <div class="section-title">No Liability for Losses</div>
+    <p>To the maximum extent permitted by applicable law, <strong>Edutech Wise FZCO, its directors, officers, employees, contractors, and affiliates shall not be liable</strong> for any direct, indirect, incidental, special, consequential, exemplary, or punitive damages of any kind, including but not limited to:</p>
+    <ul>
+      <li>Loss of digital assets, cryptocurrency, tokens, or NFTs;</li>
+      <li>Financial losses resulting from phishing attacks, scams, or fraudulent transactions not detected by the Service;</li>
+      <li>Losses arising from smart contract interactions, protocol exploits, or DeFi risks;</li>
+      <li>Any harm resulting from the Service's failure to identify, flag, or block a threat;</li>
+      <li>Losses resulting from false positives or inaccurate threat assessments by the Service;</li>
+      <li>Any indirect or consequential loss arising from reliance on information provided by the extension.</li>
+    </ul>
+    <p>This limitation applies regardless of whether the Company has been advised of the possibility of such damages, and regardless of the legal theory under which such damages are claimed. You use SHIELD CryptoGuard entirely <strong>at your own risk</strong>.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05 — DISCLAIMER OF WARRANTIES</div>
+    <div class="section-title">No Guarantees</div>
+    <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND. THE COMPANY EXPRESSLY DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WITHOUT LIMITATION:</p>
+    <ul>
+      <li>Any implied warranty of merchantability, fitness for a particular purpose, or non-infringement;</li>
+      <li>Any warranty that the Service will be uninterrupted, error-free, or free from harmful components;</li>
+      <li>Any warranty regarding the accuracy, completeness, or timeliness of threat detection;</li>
+      <li>Any warranty that the Service will detect or prevent any specific threat, attack, or scam.</li>
+    </ul>
+    <p>The fact that SHIELD CryptoGuard does not flag a website, contract, or transaction as dangerous <strong>does not constitute a guarantee of safety</strong>. Always exercise independent caution when interacting with Web3.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">06 — SUBSCRIPTION & PAYMENTS</div>
+    <div class="section-title">PRO Plan & Billing</div>
+    <p>SHIELD CryptoGuard offers a free tier and a paid <strong>PRO Shield</strong> subscription at <strong>$9.00 USD per month</strong>, processed through Stripe. By subscribing to the PRO plan, you agree to the following:</p>
+    <ul>
+      <li>A <strong>7-day free trial</strong> is included. You will not be charged during the trial period;</li>
+      <li>After the trial, your payment method will be automatically charged $9.00/month unless you cancel;</li>
+      <li>You may cancel your subscription at any time through your billing portal. Cancellation takes effect at the end of the current billing period;</li>
+      <li>Payments are non-refundable except where required by applicable law;</li>
+      <li>Prices may be updated with 14 days' notice.</li>
+    </ul>
+    <p>Subscription management is handled via Stripe. The Company does not store your payment card details.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">07 — ACCEPTABLE USE</div>
+    <div class="section-title">How You May Use the Service</div>
+    <p>You agree to use SHIELD CryptoGuard solely for its intended purpose of personal Web3 security monitoring. You may not:</p>
+    <ul>
+      <li>Reverse engineer, decompile, or attempt to extract the source code of the extension beyond what is publicly available on our GitHub repository;</li>
+      <li>Use the Service to build competing products without written consent from the Company;</li>
+      <li>Attempt to circumvent, disable, or interfere with any security or access control features;</li>
+      <li>Use automated tools to scrape or extract data from the Service's APIs beyond personal use limits;</li>
+      <li>Misrepresent the Service's capabilities or use the SHIELD CryptoGuard name or brand without authorization.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-num">08 — OPEN SOURCE & INTELLECTUAL PROPERTY</div>
+    <div class="section-title">Code & Brand</div>
+    <p>The SHIELD CryptoGuard browser extension source code is publicly available on GitHub and is provided for transparency and community review. The open-source nature of the extension code does not grant you any rights to the <strong>SHIELD CryptoGuard</strong> brand name, logo, trademark, or associated intellectual property owned by Edutech Wise FZCO.</p>
+    <p>All rights to the brand, website design, backend systems, and proprietary threat intelligence data remain the exclusive property of Edutech Wise FZCO.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">09 — MODIFICATIONS TO THE SERVICE & TERMS</div>
+    <div class="section-title">Changes Over Time</div>
+    <p>As SHIELD CryptoGuard is a beta product under continuous development, the Company reserves the right to modify, update, suspend, or discontinue any part of the Service at any time without prior notice. This includes changes to:</p>
+    <ul>
+      <li>Threat detection algorithms and blacklists;</li>
+      <li>Features available in the free and PRO tiers;</li>
+      <li>The extension's interface and functionality;</li>
+      <li>Backend APIs and data sources used for analysis.</li>
+    </ul>
+    <p>The Company also reserves the right to update these Terms at any time. The "Last Updated" date at the top of this document will reflect the most recent revision. Continued use of the Service after any changes constitutes your acceptance of the updated Terms.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">10 — GOVERNING LAW & DISPUTE RESOLUTION</div>
+    <div class="section-title">Legal Framework</div>
+    <p>These Terms are governed by and construed in accordance with the laws of the <strong>United Arab Emirates</strong>, without regard to conflict of law principles. Any dispute arising out of or relating to these Terms or the Service shall first be attempted to be resolved through good-faith negotiation between the parties.</p>
+    <p>If resolution cannot be reached within 60 days, disputes shall be submitted to binding arbitration under UAE law. You waive any right to participate in class action lawsuits or class-wide arbitration in connection with any dispute related to the Service.</p>
+    <p>Nothing in these Terms limits your rights under mandatory consumer protection laws applicable in your jurisdiction.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">11 — CONTACT</div>
+    <div class="section-title">Get in Touch</div>
+    <p>For questions regarding these Terms of Service, billing issues, or legal matters, please contact:</p>
+    <p><strong>Edutech Wise FZCO</strong><br>
+    Operating as: SHIELD CryptoGuard — Web3 Antivirus<br>
+    Jurisdiction: United Arab Emirates<br>
+    Website: cryptoguard.site</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
+  <div class="footer-text">© 2026 Edutech Wise FZCO — United Arab Emirates</div>
+  <div class="footer-text">Terms of Service v1.0 — February 2026</div>
+</footer>
+
+</body>
+</html>
