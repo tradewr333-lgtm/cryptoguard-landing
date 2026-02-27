@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — SHIELD CryptoGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020804;
+  --metal-dark: #0a1a0a;
+  --green: #00ff88;
+  --green-glow: rgba(0,255,136,0.4);
+  --silver: #8ab88a;
+  --silver2: #c8e8c8;
+  --border: rgba(0,255,136,0.15);
+  --border2: rgba(0,255,136,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: #c8e8c8;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  pointer-events: none;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 64px;
+  background: rgba(2,8,4,0.95);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-decoration: none;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+.nav-back {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  color: var(--silver); text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 8px 20px; transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-back:hover { color: var(--green); border-color: var(--green); }
+
+main {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto;
+  padding: 120px 48px 80px;
+}
+
+.doc-header { margin-bottom: 60px; }
+.doc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 4px;
+  color: var(--green); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.doc-tag::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+.doc-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900; color: var(--silver2);
+  margin-bottom: 12px; line-height: 1.1;
+}
+.doc-title span { color: var(--green); }
+.doc-meta {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; color: rgba(200,232,200,0.3);
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+
+/* COMMITMENT BOX — green, not red */
+.commitment-box {
+  background: rgba(0,255,136,0.03);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-left: 3px solid var(--green);
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.commitment-box::before {
+  content: '◆ OUR COMMITMENT TO YOUR PRIVACY';
+  font-family: 'Orbitron', monospace;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 3px;
+  color: var(--green); display: block; margin-bottom: 14px;
+}
+.commitment-box p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem; line-height: 1.9;
+  color: rgba(200,232,200,0.6);
+  margin-bottom: 14px;
+}
+.commitment-box p:last-child { margin-bottom: 0; }
+.commitment-box strong { color: var(--silver2); }
+
+/* BETA NOTICE — amber tone */
+.beta-notice {
+  background: rgba(255,160,0,0.03);
+  border: 1px solid rgba(255,160,0,0.2);
+  border-left: 3px solid #ffa000;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.beta-notice::before {
+  content: '⚠ BETA PRODUCT & WEB3 SCOPE NOTICE';
+  font-family: 'Orbitron', monospace;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 3px;
+  color: #ffa000; display: block; margin-bottom: 12px;
+}
+.beta-notice p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.85;
+  color: rgba(200,232,200,0.5);
+  margin-bottom: 12px;
+}
+.beta-notice p:last-child { margin-bottom: 0; }
+.beta-notice strong { color: rgba(255,160,0,0.85); }
+
+.section {
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  background: var(--metal-dark);
+  padding: 32px 36px;
+  position: relative;
+}
+.section::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.section-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 4px;
+  color: rgba(0,255,136,0.3); margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.88rem; font-weight: 700; letter-spacing: 2px;
+  color: var(--green); margin-bottom: 18px;
+}
+.section p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.9;
+  color: rgba(200,232,200,0.5);
+  margin-bottom: 14px;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: var(--silver2); font-weight: 600; }
+.section ul {
+  list-style: none; margin: 10px 0 14px 0;
+}
+.section ul li {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.77rem; line-height: 1.8;
+  color: rgba(200,232,200,0.45);
+  padding-left: 20px; position: relative;
+  margin-bottom: 6px;
+}
+.section ul li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--green); font-size: 0.6rem;
+}
+.section ul li strong { color: rgba(200,232,200,0.75); }
+
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(2,8,4,0.8);
+}
+.footer-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.72rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-shadow: 0 0 20px var(--green-glow);
+}
+.footer-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; color: rgba(200,232,200,0.2);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 28 32" fill="none">
+      <defs><linearGradient id="ng3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4dff9f"/><stop offset="100%" stop-color="#00cc6a"/></linearGradient></defs>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" fill="url(#ng3)" opacity="0.12"/>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" stroke="url(#ng3)" stroke-width="1.5" fill="none"/>
+      <path d="M9 16l3.5 3.5L19 12" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    SHIELD CRYPTOGUARD
+  </a>
+  <a href="/" class="nav-back">← BACK TO SITE</a>
+</nav>
+
+<main>
+  <div class="doc-header">
+    <div class="doc-tag">// LEGAL DOCUMENT</div>
+    <h1 class="doc-title">Privacy <span>Policy</span></h1>
+    <div class="doc-meta">LAST UPDATED: FEBRUARY 2026 — VERSION 1.0</div>
+    <div class="doc-meta">SHIELD CRYPTOGUARD — EDUTECH WISE FZCO — UNITED ARAB EMIRATES</div>
+  </div>
+
+  <!-- COMMITMENT — first two paragraphs dedicated to privacy respect -->
+  <div class="commitment-box">
+    <p>
+      At <strong>SHIELD CryptoGuard</strong>, operated by <strong>Edutech Wise FZCO</strong> (UAE), we treat the privacy of our users as a foundational principle — not a legal formality. We are aware that the people who use a Web3 security tool are precisely the people who understand the value of sovereignty over their own data. For this reason, we have structured our data practices around a single rule: <strong>we collect only what is strictly necessary to deliver the Service, and nothing more.</strong> We do not sell, rent, or trade your personal information to any third party for commercial gain. We do not build advertising profiles. We do not monetize your behavior. Your data exists in our systems to protect you — and for no other purpose.
+    </p>
+    <p>
+      We also want to be direct about something that few companies acknowledge openly: <strong>SHIELD CryptoGuard is a beta product, still under active development, and it operates at the intersection of browser activity and public blockchain networks.</strong> This means that not every aspect of data flow is fully within our control. When you interact with Web3 protocols — decentralized exchanges, smart contracts, NFT platforms, wallet connections — those interactions occur on public blockchain infrastructure that is, by its nature, transparent, permissionless, and outside the reach of any single company, including ours. We cannot modify, erase, or restrict what is written to a public ledger. We can only be honest about it, which is what this policy is for.
+    </p>
+  </div>
+
+  <div class="beta-notice">
+    <p>
+      As a <strong>beta-stage product</strong>, SHIELD CryptoGuard may undergo significant changes to its architecture, data handling mechanisms, and feature set over time. Practices described in this policy reflect our current state and may be updated as the product matures. We will notify users of material changes by updating the "Last Updated" date above and, where feasible, through in-extension notices.
+    </p>
+    <p>
+      Furthermore, <strong>on-chain data — including your wallet address and any transaction you broadcast to a public blockchain — is permanently and publicly visible</strong> to anyone, by design. SHIELD CryptoGuard reads portions of this data to deliver its threat assessments, but we do not control the underlying protocols, cannot delete blockchain records, and are not responsible for the inherent transparency of decentralized networks.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">01 — SCOPE & WHO WE ARE</div>
+    <div class="section-title">About This Policy</div>
+    <p>This Privacy Policy ("Policy") describes how <strong>Edutech Wise FZCO</strong>, incorporated under the laws of the <strong>United Arab Emirates</strong> and operating the SHIELD CryptoGuard browser extension and website at cryptoguard.site ("we", "us", "our"), collects, uses, stores, and protects information in connection with your use of the Service.</p>
+    <p>This Policy applies to information collected through the SHIELD CryptoGuard browser extension, the cryptoguard.site website, our backend APIs, and any communications between you and us. It does not apply to third-party websites, blockchain protocols, or services that may be linked to or referenced by the extension.</p>
+    <p>By using SHIELD CryptoGuard, you acknowledge that you have read and understood this Policy. If you do not agree with these practices, please discontinue use of the Service.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02 — WHAT INFORMATION WE COLLECT</div>
+    <div class="section-title">Data We Receive From You</div>
+    <p>We operate on a minimal data collection philosophy. Depending on how you interact with SHIELD CryptoGuard, we may collect the following categories of information:</p>
+    <ul>
+      <li><strong>Account & subscription data:</strong> If you subscribe to the PRO plan, Stripe processes your payment. We receive only a confirmation of subscription status and a masked billing reference. We do not store your full card number or banking details in our systems.</li>
+      <li><strong>Email address:</strong> Collected only if you sign up for updates, support requests, or subscription management. Used exclusively for service communications. Never shared with third parties for marketing purposes.</li>
+      <li><strong>Extension usage signals:</strong> Anonymized, aggregated data about which threat categories are triggered (e.g., how many phishing alerts were generated) may be logged to improve detection accuracy. This data is not linked to your identity.</li>
+      <li><strong>Public wallet addresses:</strong> When you interact with a Web3 site while the extension is active, SHIELD CryptoGuard may read your publicly visible wallet address to perform threat assessments. This address is queried against security APIs (such as GoPlus Security) but is not stored persistently in our databases.</li>
+      <li><strong>URLs and smart contract addresses:</strong> The extension analyzes URLs and contract addresses you encounter to detect threats in real time. These are processed transiently for threat evaluation and are not retained as personally identifiable records.</li>
+      <li><strong>Technical metadata:</strong> Standard server logs may capture your IP address, browser type, and access timestamps when you interact with our backend API. This is used solely for security monitoring and abuse prevention, and is retained for a limited period.</li>
+    </ul>
+    <p>We do not collect government-issued identification, social security numbers, biometric data, or any sensitive personal data beyond what is described above.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03 — HOW WE USE YOUR INFORMATION</div>
+    <div class="section-title">Purpose of Data Processing</div>
+    <p>Every piece of information we collect serves a specific, limited purpose. We use your data exclusively to:</p>
+    <ul>
+      <li>Deliver real-time threat detection and security assessments within the extension;</li>
+      <li>Manage your subscription and provide access to PRO features;</li>
+      <li>Respond to support requests and resolve technical issues;</li>
+      <li>Detect and prevent abuse, fraud, or misuse of the Service;</li>
+      <li>Improve the accuracy and coverage of our threat detection systems using aggregated, anonymized signals;</li>
+      <li>Comply with applicable legal obligations under UAE law.</li>
+    </ul>
+    <p>We do not use your data to build advertising profiles, serve targeted ads, or sell behavioral data to data brokers or marketing companies under any circumstances.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04 — ON-CHAIN DATA & BLOCKCHAIN LIMITATIONS</div>
+    <div class="section-title">What We Cannot Control</div>
+    <p>SHIELD CryptoGuard is designed to protect you within the Web3 environment. However, the decentralized, public nature of blockchain networks means that <strong>certain data flows are entirely outside our control.</strong></p>
+    <p>Specifically, you should be aware that:</p>
+    <ul>
+      <li>All transactions you broadcast to a public blockchain (Ethereum, BNB Chain, Polygon, etc.) are permanently and publicly recorded and cannot be deleted, modified, or erased by SHIELD CryptoGuard or any other party;</li>
+      <li>Your wallet address, transaction history, token balances, and smart contract interactions are visible to anyone with access to a blockchain explorer;</li>
+      <li>Third-party security APIs we query (such as GoPlus Security, PhishFort, or CryptoScamDB) to perform threat analysis operate under their own privacy policies, which we encourage you to review;</li>
+      <li>DeFi protocols, NFT platforms, and decentralized applications you interact with while using our extension are independent services with their own data practices, which are not governed by this Policy.</li>
+    </ul>
+    <p>We read publicly available on-chain data to provide threat intelligence. We do not claim ownership of, and cannot delete, any information that exists natively on public blockchain networks.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05 — DATA SHARING & THIRD PARTIES</div>
+    <div class="section-title">Who Else May See Your Data</div>
+    <p><strong>We do not sell your personal information.</strong> We do not share your data with third parties for advertising, marketing, or commercial profiling purposes. Limited data sharing occurs only in the following strictly necessary circumstances:</p>
+    <ul>
+      <li><strong>Stripe:</strong> Processes subscription payments. Operates under its own PCI-DSS compliant privacy framework. We receive only transaction confirmation and subscription status.</li>
+      <li><strong>Security API providers</strong> (e.g., GoPlus Security, PhishFort, CryptoScamDB): Receive wallet addresses and contract addresses for threat analysis queries. These queries are necessary to deliver the core functionality of the extension.</li>
+      <li><strong>Infrastructure providers:</strong> Our backend runs on Railway (hosting). Standard infrastructure providers may process technical metadata as part of service delivery.</li>
+      <li><strong>Legal requirements:</strong> We may disclose information if required to do so by a valid legal order, court ruling, or regulatory obligation under applicable UAE law or international legal cooperation frameworks. We will notify you where legally permissible.</li>
+    </ul>
+    <p>No data is shared with project teams, advertisers, data brokers, or any party not listed above.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">06 — DATA RETENTION</div>
+    <div class="section-title">How Long We Keep Your Data</div>
+    <p>We retain personal information only for as long as necessary to fulfill the purposes described in this Policy, or as required by applicable law. Specifically:</p>
+    <ul>
+      <li>Subscription and billing records are retained for the duration of your active subscription plus any period required for legal and accounting compliance;</li>
+      <li>Email addresses for support communications are retained until you request deletion or your account is closed;</li>
+      <li>Technical server logs are retained for a maximum of 90 days for security monitoring purposes, after which they are purged;</li>
+      <li>Threat analysis queries (URLs, wallet addresses passed to security APIs) are processed transiently and not retained in persistent storage on our systems.</li>
+    </ul>
+    <p>Upon request, we will delete your personal information from our systems within a reasonable timeframe, subject to any legal retention obligations.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">07 — COOKIES & TRACKING</div>
+    <div class="section-title">Website Tracking Practices</div>
+    <p>The SHIELD CryptoGuard website (cryptoguard.site) uses minimal tracking. We do not deploy advertising tracking pixels, behavioral analytics networks, or third-party retargeting cookies. The website may use:</p>
+    <ul>
+      <li><strong>Strictly necessary cookies:</strong> Required for basic website functionality and session management;</li>
+      <li><strong>Analytics:</strong> If basic, privacy-respecting analytics are used to understand traffic patterns, data is aggregated and anonymized and is not linked to individual users.</li>
+    </ul>
+    <p>The SHIELD CryptoGuard browser extension itself does not set cookies on the websites you visit. It reads page content and network requests solely to perform security analysis.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">08 — SECURITY SAFEGUARDS</div>
+    <div class="section-title">How We Protect Your Data</div>
+    <p>We implement reasonable technical and organizational measures to protect personal information against unauthorized access, loss, alteration, and disclosure. These include encrypted communications (HTTPS/TLS), access controls on our backend systems, and limited personnel access to user data.</p>
+    <p>However, <strong>no security system is impenetrable.</strong> As a beta product, SHIELD CryptoGuard may have limitations in its security architecture that are actively being addressed. We are transparent about this reality. You are responsible for maintaining the security of your own wallet credentials, seed phrases, and private keys — SHIELD CryptoGuard does not and will never request access to these.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">09 — YOUR RIGHTS</div>
+    <div class="section-title">Control Over Your Information</div>
+    <p>Subject to applicable law, you have the right to:</p>
+    <ul>
+      <li>Request access to the personal information we hold about you;</li>
+      <li>Request correction of inaccurate or incomplete data;</li>
+      <li>Request deletion of your personal data from our systems (subject to legal retention obligations);</li>
+      <li>Withdraw consent to any processing based on your consent at any time;</li>
+      <li>Object to certain types of data processing.</li>
+    </ul>
+    <p>To exercise any of these rights, contact us via the information in Section 11 below. We will respond within a reasonable timeframe and may need to verify your identity before processing your request. Note that rights regarding data recorded on public blockchains cannot be fulfilled, as that data is beyond our control by design.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">10 — MINORS</div>
+    <div class="section-title">Age Requirement</div>
+    <p>SHIELD CryptoGuard is not directed at individuals under the age of 18. We do not knowingly collect personal information from minors. If you believe a minor has provided us with personal information, please contact us immediately and we will take reasonable steps to remove it from our systems.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">11 — CHANGES TO THIS POLICY</div>
+    <div class="section-title">Policy Updates</div>
+    <p>As SHIELD CryptoGuard evolves from beta toward a mature product, this Policy will be updated to reflect changes in our data practices, legal requirements, or product functionality. We will update the "Last Updated" date at the top of this page whenever changes are made. Continued use of the Service following any update constitutes acceptance of the revised Policy.</p>
+    <p>For material changes that significantly affect your privacy rights, we will make reasonable efforts to provide advance notice through the extension or website.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">12 — CONTACT</div>
+    <div class="section-title">Privacy Inquiries</div>
+    <p>For any questions, requests, or concerns regarding this Privacy Policy or our data practices, please contact:</p>
+    <p>
+      <strong>Edutech Wise FZCO</strong><br>
+      Operating as: SHIELD CryptoGuard — Web3 Antivirus<br>
+      Jurisdiction: United Arab Emirates<br>
+      Website: cryptoguard.site
+    </p>
+    <p>We are committed to resolving privacy concerns promptly and transparently.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
+  <div class="footer-text">© 2026 Edutech Wise FZCO — United Arab Emirates</div>
+  <div class="footer-text">Privacy Policy v1.0 — February 2026</div>
+</footer>
+
+</body>
+</html>
