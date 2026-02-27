@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features — SHIELD CryptoGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020804;
+  --metal-dark: #0a1a0a;
+  --green: #00ff88;
+  --green-glow: rgba(0,255,136,0.4);
+  --silver: #8ab88a;
+  --silver2: #c8e8c8;
+  --red: #ff2244;
+  --orange: #ff6600;
+  --yellow: #ffd700;
+  --border: rgba(0,255,136,0.15);
+  --border2: rgba(0,255,136,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: #c8e8c8;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 64px;
+  background: rgba(2,8,4,0.95);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-decoration: none;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+.nav-back {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  color: var(--silver); text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 8px 20px; transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-back:hover { color: var(--green); border-color: var(--green); }
+
+/* MAIN */
+main { position: relative; z-index: 1; }
+
+/* HERO */
+.feat-hero {
+  max-width: 1100px; margin: 0 auto;
+  padding: 130px 48px 60px;
+  text-align: center;
+}
+.doc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 4px;
+  color: var(--green); margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.doc-tag::before, .doc-tag::after {
+  content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--green);
+}
+.feat-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900; color: var(--silver2);
+  margin-bottom: 16px; line-height: 1.05;
+}
+.feat-title span { color: var(--green); }
+.feat-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.82rem; color: rgba(200,232,200,0.35);
+  line-height: 1.9; max-width: 680px; margin: 0 auto 56px;
+}
+
+/* STAT BAR */
+.stat-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  max-width: 900px; margin: 0 auto 80px;
+  border: 1px solid var(--border);
+  background: var(--metal-dark);
+  position: relative; overflow: hidden;
+}
+.stat-bar::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.sb-item {
+  padding: 24px 20px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.sb-item:last-child { border-right: none; }
+.sb-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.6rem; font-weight: 900;
+  color: var(--green); text-shadow: 0 0 20px var(--green-glow);
+  display: block; margin-bottom: 4px;
+}
+.sb-lbl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 2px;
+  color: rgba(200,232,200,0.25);
+}
+
+/* DIVIDER */
+.section-divider {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 48px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.cat-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.62rem; letter-spacing: 4px;
+  color: var(--green); padding: 48px 48px 24px;
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; gap: 16px;
+}
+.cat-label::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+
+/* FEATURE CARDS GRID */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 48px 2px;
+}
+.features-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+.f-card {
+  background: var(--metal-dark);
+  border: 1px solid var(--border);
+  padding: 36px 32px;
+  position: relative; overflow: hidden;
+  transition: all 0.35s;
+}
+.f-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  opacity: 0.6;
+}
+.f-card.green::before  { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+.f-card.red::before    { background: linear-gradient(90deg, transparent, var(--red), transparent); }
+.f-card.orange::before { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
+.f-card.yellow::before { background: linear-gradient(90deg, transparent, var(--yellow), transparent); }
+.f-card.blue::before   { background: linear-gradient(90deg, transparent, #4488ff, transparent); }
+
+.f-card:hover {
+  border-color: rgba(0,255,136,0.25);
+  background: #0d1f0d;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,136,0.05);
+}
+
+/* glow tint on hover per color */
+.f-card.red:hover   { border-color: rgba(255,34,68,0.2); background: #160507; box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,34,68,0.05); }
+.f-card.orange:hover{ border-color: rgba(255,102,0,0.2); background: #160a03; }
+.f-card.yellow:hover{ border-color: rgba(255,215,0,0.2); background: #141200; }
+.f-card.blue:hover  { border-color: rgba(68,136,255,0.2); background: #030a16; }
+
+.f-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.52rem; letter-spacing: 4px;
+  color: rgba(200,232,200,0.2); margin-bottom: 16px;
+}
+.f-icon {
+  width: 52px; height: 52px; margin-bottom: 18px;
+  border: 1px solid;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  position: relative; overflow: hidden;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.f-icon::before {
+  content: ''; position: absolute; inset: 0;
+  background: currentColor; opacity: 0.06;
+}
+.f-icon.green { border-color: rgba(0,255,136,0.25); color: var(--green); }
+.f-icon.red   { border-color: rgba(255,34,68,0.3);  color: var(--red); }
+.f-icon.orange{ border-color: rgba(255,102,0,0.3);  color: var(--orange); }
+.f-icon.yellow{ border-color: rgba(255,215,0,0.3);  color: var(--yellow); }
+.f-icon.blue  { border-color: rgba(68,136,255,0.3); color: #4488ff; }
+
+.f-badge {
+  display: inline-block;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.48rem; font-weight: 700; letter-spacing: 2px;
+  padding: 3px 10px; margin-bottom: 12px;
+}
+.f-badge.crit { background: var(--red); color: #fff; }
+.f-badge.high { background: var(--orange); color: #fff; }
+.f-badge.med  { background: var(--yellow); color: #000; }
+.f-badge.info { background: rgba(0,255,136,0.15); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
+.f-badge.pro  { background: rgba(68,136,255,0.15); color: #4488ff; border: 1px solid rgba(68,136,255,0.3); }
+
+.f-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 2px;
+  color: var(--silver2); margin-bottom: 14px;
+  line-height: 1.3;
+}
+.f-desc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.76rem; line-height: 1.85;
+  color: rgba(200,232,200,0.4);
+  margin-bottom: 16px;
+}
+.f-desc strong { color: rgba(200,232,200,0.75); }
+.f-desc code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.12);
+  padding: 1px 5px; color: var(--green);
+}
+
+.f-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.f-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.58rem; color: rgba(200,232,200,0.25);
+  border: 1px solid rgba(200,232,200,0.08);
+  padding: 3px 8px;
+}
+
+/* WIDE CARD */
+.f-card.wide {
+  grid-column: span 2;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+}
+.f-card.full {
+  grid-column: span 3;
+}
+
+/* THREAT MATRIX */
+.threat-matrix {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 48px 80px;
+}
+.tm-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 100px 100px;
+  gap: 0;
+  border-bottom: 1px solid rgba(0,255,136,0.05);
+  align-items: center;
+}
+.tm-row.header {
+  background: rgba(0,255,136,0.03);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.tm-cell {
+  padding: 12px 16px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; color: rgba(200,232,200,0.4);
+}
+.tm-cell.header-cell {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.55rem; letter-spacing: 3px;
+  color: rgba(0,255,136,0.4);
+}
+.tm-threat {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem; color: var(--silver2);
+  font-weight: 600;
+}
+.tm-sev {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.5rem; font-weight: 700; letter-spacing: 1px;
+  padding: 3px 8px; display: inline-block;
+}
+.sev-c { background: var(--red); color: #fff; }
+.sev-h { background: var(--orange); color: #fff; }
+.sev-m { background: var(--yellow); color: #000; }
+.sev-i { background: rgba(0,255,136,0.15); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
+.tm-check { text-align: center; font-size: 0.8rem; }
+.tm-check.yes { color: var(--green); }
+.tm-check.no  { color: rgba(200,232,200,0.15); }
+.tm-check.pro-only { color: #4488ff; font-size: 0.6rem; font-family: 'Orbitron', monospace; letter-spacing: 1px; }
+
+/* CTA */
+.feat-cta {
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,255,136,0.02));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 48px; text-align: center;
+  position: relative; overflow: hidden;
+  margin: 0 0 0 0;
+}
+.feat-cta::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.cta-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900; color: var(--silver2); margin-bottom: 12px;
+}
+.cta-title span { color: var(--green); }
+.cta-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; color: rgba(200,232,200,0.35);
+  margin-bottom: 36px; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.cta-sub { margin-bottom: 36px; }
+.btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #00ff88, #00cc6a);
+  color: #000; text-decoration: none; display: inline-block;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(0,255,136,0.3);
+}
+.btn-primary:hover { box-shadow: 0 0 60px rgba(0,255,136,0.6); transform: translateY(-2px); }
+.btn-ghost {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+  padding: 16px 36px;
+  background: transparent;
+  color: var(--green); text-decoration: none; display: inline-block;
+  border: 1px solid var(--green);
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.3s;
+}
+.btn-ghost:hover { background: rgba(0,255,136,0.08); }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+  background: rgba(2,8,4,0.8);
+}
+.footer-logo { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; letter-spacing:3px; color:var(--green); text-shadow:0 0 20px var(--green-glow); }
+.footer-text { font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:rgba(200,232,200,0.2); }
+.footer-links { display:flex; gap:20px; font-family:'Share Tech Mono',monospace; font-size:0.62rem; }
+.footer-links a { color:rgba(200,232,200,0.3); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:6px; }
+.footer-links a:hover { color:var(--green); }
+
+@keyframes pulse {
+  0%,100% { opacity:1; }
+  50% { opacity:0.4; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 28 32" fill="none">
+      <defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4dff9f"/><stop offset="100%" stop-color="#00cc6a"/></linearGradient></defs>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" fill="url(#ng)" opacity="0.12"/>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" stroke="url(#ng)" stroke-width="1.5" fill="none"/>
+      <path d="M9 16l3.5 3.5L19 12" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    SHIELD CRYPTOGUARD
+  </a>
+  <a href="/" class="nav-back">← BACK TO SITE</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<div class="feat-hero">
+  <div class="doc-tag">// FULL FEATURE ARSENAL</div>
+  <h1 class="feat-title">Every Weapon in the<br><span>Web3 Security Stack</span></h1>
+  <p class="feat-sub">The decentralized ecosystem does not have guardrails. Every protocol you interact with, every approval you sign, every contract you call is a potential attack surface. SHIELD CryptoGuard closes those surfaces — one by one — in real time, before your wallet commits to anything.</p>
+  <div class="stat-bar">
+    <div class="sb-item"><span class="sb-num">12</span><span class="sb-lbl">ACTIVE SHIELDS</span></div>
+    <div class="sb-item"><span class="sb-num">6</span><span class="sb-lbl">EVM CHAINS</span></div>
+    <div class="sb-item"><span class="sb-num">&lt;50ms</span><span class="sb-lbl">VERDICT TIME</span></div>
+    <div class="sb-item"><span class="sb-num">6h</span><span class="sb-lbl">INTEL REFRESH</span></div>
+  </div>
+</div>
+
+<!-- ─── CATEGORY 1: PHISHING & DOMAIN ─── -->
+<div class="cat-label">// 01 — PHISHING & DOMAIN ATTACK PREVENTION</div>
+<div class="features-grid">
+
+  <div class="f-card red">
+    <div class="f-num">FEATURE 01</div>
+    <div class="f-icon red">🎣</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">REAL-TIME PHISHING DETECTION</div>
+    <div class="f-desc">Every URL you navigate to is evaluated before your browser renders the page. SHIELD checks domain age, SSL certificate provenance, and known-bad infrastructure fingerprints. <strong>Fake MetaMask, Uniswap, OpenSea, Ledger Live, and 300+ protocol UIs</strong> are blocked before a single pixel loads. If it is on the blacklist, it never reaches your screen.</div>
+    <div class="f-tags"><span class="f-tag">PHISHING</span><span class="f-tag">DOMAIN SPOOFING</span><span class="f-tag">UI CLONE</span><span class="f-tag">REAL-TIME</span></div>
+  </div>
+
+  <div class="f-card red">
+    <div class="f-num">FEATURE 02</div>
+    <div class="f-icon red">🔤</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">IDN HOMOGRAPH INTERCEPTION</div>
+    <div class="f-desc">Attackers register domains using Unicode characters that are visually identical to Latin letters — <code>uniswаp.org</code> with a Cyrillic 'а' looks exactly like the real thing in your browser bar. SHIELD normalizes every domain string to its ASCII representation and runs similarity scoring against <strong>300+ legitimate DeFi protocol domains</strong> before any wallet interaction is permitted.</div>
+    <div class="f-tags"><span class="f-tag">IDN HOMOGRAPH</span><span class="f-tag">UNICODE ATTACK</span><span class="f-tag">TYPOSQUATTING</span></div>
+  </div>
+
+  <div class="f-card orange">
+    <div class="f-num">FEATURE 03</div>
+    <div class="f-icon orange">🌐</div>
+    <span class="f-badge high">HIGH DEFENSE</span>
+    <div class="f-title">SUBDOMAIN HIJACK DETECTION</div>
+    <div class="f-desc">Sophisticated attackers don't always register fake domains — they compromise legitimate subdomains or abuse DNS wildcard records to serve phishing pages under trusted parent domains. SHIELD evaluates the <strong>full domain chain</strong>, not just the apex, and flags subdomain-level anomalies that would bypass conventional blocklist tools entirely.</div>
+    <div class="f-tags"><span class="f-tag">DNS ATTACK</span><span class="f-tag">SUBDOMAIN</span><span class="f-tag">WILDCARD</span></div>
+  </div>
+
+</div>
+
+<!-- ─── CATEGORY 2: CONTRACT ANALYSIS ─── -->
+<div class="cat-label">// 02 — SMART CONTRACT THREAT ANALYSIS</div>
+<div class="features-grid">
+
+  <div class="f-card red">
+    <div class="f-num">FEATURE 04</div>
+    <div class="f-icon red">🍯</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">HONEYPOT CONTRACT SIMULATOR</div>
+    <div class="f-desc">Before you buy any token, SHIELD dispatches the contract address to an on-chain simulation layer that executes a test sell transaction against the bytecode without broadcasting it to the network. If the simulation reverts — due to <strong>hidden whitelist modifiers, owner-controlled tax toggles, or dynamic revert conditions</strong> — you receive a CRITICAL alert before a single wei leaves your wallet. Honeypots that have never been publicly reported are caught by behavioral simulation, not just signature matching.</div>
+    <div class="f-tags"><span class="f-tag">HONEYPOT</span><span class="f-tag">SELL SIMULATION</span><span class="f-tag">BYTECODE ANALYSIS</span><span class="f-tag">EVM</span></div>
+  </div>
+
+  <div class="f-card red">
+    <div class="f-num">FEATURE 05</div>
+    <div class="f-icon red">🪤</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">RUGPULL RISK SCORING</div>
+    <div class="f-desc">SHIELD analyzes the on-chain fingerprint of every contract you interact with for rugpull mechanics: <strong>liquidity lock expiry timers, admin key concentration, upgradeable proxy patterns without timelock governance, team allocation wallets holding &gt;30% supply with no vesting schedule,</strong> and deployer wallet histories showing prior flagged launches. Each factor contributes to a composite risk score displayed before you commit capital.</div>
+    <div class="f-tags"><span class="f-tag">RUGPULL</span><span class="f-tag">LIQUIDITY LOCK</span><span class="f-tag">PROXY UPGRADE</span><span class="f-tag">DEPLOYER HISTORY</span></div>
+  </div>
+
+  <div class="f-card orange">
+    <div class="f-num">FEATURE 06</div>
+    <div class="f-icon orange">⚙️</div>
+    <span class="f-badge high">HIGH DEFENSE</span>
+    <div class="f-title">UNVERIFIED BYTECODE FLAGGING</div>
+    <div class="f-desc">Smart contracts whose source code has not been verified on a public block explorer are fundamentally unauditable by the community. SHIELD surfaces this status immediately for any contract requesting custody of your funds, token approvals, or NFT minting authority — giving you the information to decide whether to trust <strong>a black-box contract with your assets</strong>.</div>
+    <div class="f-tags"><span class="f-tag">UNVERIFIED</span><span class="f-tag">BYTECODE</span><span class="f-tag">AUDIT</span></div>
+  </div>
+
+  <div class="f-card yellow">
+    <div class="f-num">FEATURE 07</div>
+    <div class="f-icon yellow">💸</div>
+    <span class="f-badge med">MEDIUM DEFENSE</span>
+    <div class="f-title">HIGH-TAX TOKEN DETECTION</div>
+    <div class="f-desc">Tokens with buy/sell taxes above 10% are flagged before you swap. SHIELD retrieves the <strong>effective tax rate from on-chain simulation</strong> — not from the project's marketing materials, which frequently misrepresent actual fees. Taxes above 25% are classified as HIGH risk; taxes implementing owner-adjustable rates with no upper bound cap are flagged as potential slow-drain mechanics regardless of current rate.</div>
+    <div class="f-tags"><span class="f-tag">HIGH TAX</span><span class="f-tag">SELL TAX</span><span class="f-tag">SLOW DRAIN</span><span class="f-tag">DEX SWAP</span></div>
+  </div>
+
+  <div class="f-card wide orange">
+    <div>
+      <div class="f-num">FEATURE 08</div>
+      <div class="f-icon orange">📊</div>
+      <span class="f-badge high">HIGH DEFENSE</span>
+      <div class="f-title">AI CONTRACT RISK SCORE (0–100)</div>
+      <div class="f-desc">Every contract receives a composite risk score from 0 (clean) to 100 (confirmed malicious), calculated by SHIELD's classification AI across eight independent threat vectors. The score is not a single API lookup — it is a <strong>weighted multi-factor verdict</strong> that accounts for bytecode heuristics, deployer behavior, liquidity profile, ownership structure, and cross-chain reputation. Score 0–25: safe to interact. Score 26–60: proceed with caution. Score 61–100: do not interact.</div>
+    </div>
+    <div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:rgba(200,232,200,0.3);margin-bottom:16px;letter-spacing:2px;">SCORE BREAKDOWN — EXAMPLE CONTRACT</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,232,200,0.4);">Source verified</span>
+            <span style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--green);">✓ PASS</span>
+          </div>
+          <div style="height:3px;background:rgba(255,255,255,0.05);"><div style="height:100%;width:5%;background:var(--green);box-shadow:0 0 6px var(--green);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,232,200,0.4);">Sell simulation</span>
+            <span style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--green);">✓ PASS</span>
+          </div>
+          <div style="height:3px;background:rgba(255,255,255,0.05);"><div style="height:100%;width:2%;background:var(--green);box-shadow:0 0 6px var(--green);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,232,200,0.4);">Liquidity lock</span>
+            <span style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--orange);">⚠ 6 DAYS</span>
+          </div>
+          <div style="height:3px;background:rgba(255,255,255,0.05);"><div style="height:100%;width:60%;background:var(--orange);box-shadow:0 0 6px var(--orange);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,232,200,0.4);">Admin key renounced</span>
+            <span style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--green);">✓ YES</span>
+          </div>
+          <div style="height:3px;background:rgba(255,255,255,0.05);"><div style="height:100%;width:3%;background:var(--green);box-shadow:0 0 6px var(--green);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(200,232,200,0.4);">Deployer history</span>
+            <span style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--green);">✓ CLEAN</span>
+          </div>
+          <div style="height:3px;background:rgba(255,255,255,0.05);"><div style="height:100%;width:4%;background:var(--green);box-shadow:0 0 6px var(--green);"></div></div>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding:12px 16px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:rgba(200,232,200,0.4);">COMPOSITE RISK SCORE</span>
+        <span style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;color:var(--green);text-shadow:0 0 16px var(--green-glow);">18 / 100</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── CATEGORY 3: APPROVAL & TRANSACTION ─── -->
+<div class="cat-label">// 03 — APPROVAL INTERCEPTION & TRANSACTION FIREWALL</div>
+<div class="features-grid">
+
+  <div class="f-card orange">
+    <div class="f-num">FEATURE 09</div>
+    <div class="f-icon orange">🔓</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">INFINITE APPROVAL BLOCKER</div>
+    <div class="f-desc">The single most common wallet drain vector in DeFi. When any contract requests <code>type(uint256).max</code> spend approval on your ERC-20 tokens, SHIELD intercepts the transaction before your wallet signs it — decodes the <strong>spender address, token, and amount</strong> — and presents you with an explicit warning. You are offered the option to approve only the exact transaction amount required, eliminating permanent unlimited spend authorization.</div>
+    <div class="f-tags"><span class="f-tag">ERC-20 APPROVAL</span><span class="f-tag">INFINITE SPEND</span><span class="f-tag">WALLET DRAIN</span></div>
+  </div>
+
+  <div class="f-card orange">
+    <div class="f-num">FEATURE 10</div>
+    <div class="f-icon orange">📝</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">PERMIT2 & EIP-712 SIGNATURE DECODER</div>
+    <div class="f-desc">Modern drainer attacks increasingly use <strong>gasless off-chain signatures</strong> — Permit2, EIP-712 typed data, and <code>eth_signTypedData</code> — rather than on-chain approval transactions, specifically because they bypass conventional security tools that only monitor <code>approve()</code> calls. SHIELD decodes every signature request your wallet receives, displays the full permission structure in plain language, and flags any off-chain approval that grants token spend authority to an unknown or risky address.</div>
+    <div class="f-tags"><span class="f-tag">PERMIT2</span><span class="f-tag">EIP-712</span><span class="f-tag">GASLESS DRAIN</span><span class="f-tag">TYPED DATA</span></div>
+  </div>
+
+  <div class="f-card green">
+    <div class="f-num">FEATURE 11</div>
+    <div class="f-icon green">🖼️</div>
+    <span class="f-badge high">HIGH DEFENSE</span>
+    <div class="f-title">SETAPPROVALFORALL INTERCEPTOR</div>
+    <div class="f-desc"><code>setApprovalForAll</code> is the NFT equivalent of an infinite ERC-20 approval — it grants a contract unrestricted access to your entire NFT collection in a single transaction. This is the primary mechanism behind <strong>NFT wallet drains</strong> that have cost the community hundreds of millions of dollars. SHIELD flags every <code>setApprovalForAll</code> call, evaluates the operator address against the threat database, and recommends denial for unverified operators.</div>
+    <div class="f-tags"><span class="f-tag">NFT DRAIN</span><span class="f-tag">SETAPPROVALFORALL</span><span class="f-tag">ERC-721</span><span class="f-tag">ERC-1155</span></div>
+  </div>
+
+</div>
+
+<!-- ─── CATEGORY 4: WALLET & ADDRESS ─── -->
+<div class="cat-label">// 04 — WALLET SECURITY & ADDRESS INTELLIGENCE</div>
+<div class="features-grid">
+
+  <div class="f-card yellow">
+    <div class="f-num">FEATURE 12</div>
+    <div class="f-icon yellow">☠️</div>
+    <span class="f-badge med">MEDIUM DEFENSE</span>
+    <div class="f-title">ADDRESS POISONING DETECTION</div>
+    <div class="f-desc">Attackers send zero-value transactions from <strong>vanity addresses matching the first and last characters</strong> of addresses you've transacted with — contaminating your history so you copy-paste the attacker's address instead of the real recipient. SHIELD monitors address similarity patterns in your active transaction context and alerts you before any outbound transfer when a destination address resembles a known poisoning wallet.</div>
+    <div class="f-tags"><span class="f-tag">ADDRESS POISONING</span><span class="f-tag">VANITY ADDRESS</span><span class="f-tag">DUST ATTACK</span></div>
+  </div>
+
+  <div class="f-card red">
+    <div class="f-num">FEATURE 13</div>
+    <div class="f-icon red">📬</div>
+    <span class="f-badge crit">CRITICAL DEFENSE</span>
+    <div class="f-title">MALICIOUS AIRDROP SCANNER</div>
+    <div class="f-desc">Unknown tokens appearing in your wallet with no prior interaction history are flagged automatically. These are almost always <strong>drainer lures</strong> — designed to appear as high-value unclaimed rewards — that redirect you to a phishing contract when you attempt to sell or claim them. SHIELD cross-references token metadata, linked domains, and deployer history to classify airdrop tokens before you make any interaction.</div>
+    <div class="f-tags"><span class="f-tag">AIRDROP LURE</span><span class="f-tag">DUSTING ATTACK</span><span class="f-tag">FAKE CLAIM</span></div>
+  </div>
+
+  <div class="f-card green">
+    <div class="f-num">FEATURE 14</div>
+    <div class="f-icon green">🔍</div>
+    <span class="f-badge info">INFORMATIONAL</span>
+    <div class="f-title">WALLET ADDRESS VERIFICATION</div>
+    <div class="f-desc">Before any significant outbound transfer, SHIELD verifies the destination wallet against its <strong>known-bad address database</strong> — covering confirmed drainer EOAs, flagged deployer wallets, sanctioned addresses, and addresses associated with documented theft events. Clean addresses are confirmed. Flagged addresses trigger an alert with the specific reason for the flag before you broadcast the transaction.</div>
+    <div class="f-tags"><span class="f-tag">EOA SCREENING</span><span class="f-tag">SANCTIONS</span><span class="f-tag">DRAINER WALLET</span></div>
+  </div>
+
+</div>
+
+<!-- ─── CATEGORY 5: INTELLIGENCE ─── -->
+<div class="cat-label">// 05 — LIVE THREAT INTELLIGENCE ENGINE</div>
+<div class="features-grid two-col">
+
+  <div class="f-card blue">
+    <div class="f-num">FEATURE 15</div>
+    <div class="f-icon blue">🧠</div>
+    <span class="f-badge pro">AI ENGINE</span>
+    <div class="f-title">OVER-THE-AIR BLACKLIST UPDATES</div>
+    <div class="f-desc">SHIELD's threat database is not a static file updated through Chrome Web Store releases. It is a <strong>living intelligence feed</strong> that propagates new threat entries to every active extension instance within hours of detection — via a signed, encrypted over-the-air pull from SHIELD's backend. New phishing domains, newly flagged contract addresses, and newly identified deployer EOAs reach your browser automatically, with zero action required from you. The gap between a new attack going live and SHIELD detecting it is measured in hours — not days or weeks.</div>
+    <div class="f-tags"><span class="f-tag">OTA UPDATE</span><span class="f-tag">LIVE INTEL</span><span class="f-tag">AUTO-UPDATE</span><span class="f-tag">6H REFRESH</span></div>
+  </div>
+
+  <div class="f-card blue">
+    <div class="f-num">FEATURE 16</div>
+    <div class="f-icon blue">📡</div>
+    <span class="f-badge pro">AI ENGINE</span>
+    <div class="f-title">BEHAVIORAL HEURISTIC DETECTION</div>
+    <div class="f-desc">SHIELD does not only match known threats — it detects <strong>unknown threats by behavioral pattern</strong>. A contract that has never been explicitly flagged can still receive a high-risk score if its bytecode exhibits structural similarities to known drainer families, if its deployer wallet has a history of short-lived token deployments, or if its liquidity profile matches the early-stage fingerprint of historical rugpulls. This proactive layer catches zero-day attacks before community reports surface them in public databases.</div>
+    <div class="f-tags"><span class="f-tag">HEURISTICS</span><span class="f-tag">ZERO-DAY</span><span class="f-tag">PATTERN MATCH</span><span class="f-tag">AI CLASSIFIER</span></div>
+  </div>
+
+</div>
+
+<!-- ─── THREAT MATRIX ─── -->
+<div class="cat-label">// THREAT COVERAGE MATRIX</div>
+<div class="threat-matrix">
+  <div class="tm-row header">
+    <div class="tm-cell header-cell">THREAT TYPE</div>
+    <div class="tm-cell header-cell">DETECTION METHOD</div>
+    <div class="tm-cell header-cell" style="text-align:center">FREE</div>
+    <div class="tm-cell header-cell" style="text-align:center">PRO</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Phishing sites</span><br><span class="tm-sev sev-c">CRITICAL</span></div>
+    <div class="tm-cell">Domain blacklist + AI similarity scoring</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">IDN homograph</span><br><span class="tm-sev sev-c">CRITICAL</span></div>
+    <div class="tm-cell">Unicode normalization + edit-distance scoring</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Honeypot tokens</span><br><span class="tm-sev sev-c">CRITICAL</span></div>
+    <div class="tm-cell">On-chain sell simulation</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Infinite approvals</span><br><span class="tm-sev sev-c">CRITICAL</span></div>
+    <div class="tm-cell">Transaction parameter decoding</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Rugpull contracts</span><br><span class="tm-sev sev-h">HIGH</span></div>
+    <div class="tm-cell">Liquidity + deployer + proxy analysis</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Malicious airdrops</span><br><span class="tm-sev sev-h">HIGH</span></div>
+    <div class="tm-cell">Token metadata + domain correlation</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Address poisoning</span><br><span class="tm-sev sev-m">MEDIUM</span></div>
+    <div class="tm-cell">Vanity address similarity detection</div>
+    <div class="tm-check yes">✓</div>
+    <div class="tm-check yes">✓</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Permit2 / EIP-712</span><br><span class="tm-sev sev-c">CRITICAL</span></div>
+    <div class="tm-cell">Off-chain signature decoding</div>
+    <div class="tm-check no">—</div>
+    <div class="tm-check pro-only">PRO</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">SetApprovalForAll</span><br><span class="tm-sev sev-c">CRITICAL</span></div>
+    <div class="tm-cell">NFT operator address screening</div>
+    <div class="tm-check no">—</div>
+    <div class="tm-check pro-only">PRO</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">AI risk scoring</span><br><span class="tm-sev sev-i">FULL ANALYSIS</span></div>
+    <div class="tm-cell">8-vector composite AI score (0–100)</div>
+    <div class="tm-check no">—</div>
+    <div class="tm-check pro-only">PRO</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">Behavioral heuristics</span><br><span class="tm-sev sev-i">AI ENGINE</span></div>
+    <div class="tm-cell">Zero-day pattern classification</div>
+    <div class="tm-check no">—</div>
+    <div class="tm-check pro-only">PRO</div>
+  </div>
+  <div class="tm-row">
+    <div class="tm-cell"><span class="tm-threat">High-tax tokens</span><br><span class="tm-sev sev-m">MEDIUM</span></div>
+    <div class="tm-cell">On-chain tax simulation</div>
+    <div class="tm-check no">—</div>
+    <div class="tm-check pro-only">PRO</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="feat-cta">
+  <div class="cta-title">16 Active Shields.<br><span>One Extension.</span></div>
+  <p class="cta-sub">In Web3, the difference between a safe transaction and an empty wallet is measured in milliseconds and information. SHIELD gives you both.</p>
+  <div class="btn-row">
+    <a href="https://buy.stripe.com/8x25kEcqicQg3bmdBY7N601" class="btn-primary">🛡 ACTIVATE PRO SHIELD — 7 DAYS FREE</a>
+    <a href="/how-it-works.html" class="btn-ghost">// HOW THE AI WORKS</a>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
+  <div class="footer-text">© 2026 Edutech Wise FZCO — United Arab Emirates</div>
+  <div class="footer-links">
+    <a href="/faq.html">FAQ</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="https://x.com/cryptoguard18" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.258 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      @CRYPTOGUARD18
+    </a>
+    <a href="https://github.com/tradewr333-lgtm/cryptoguard-extension" target="_blank">
+      <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      OPEN SOURCE
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
