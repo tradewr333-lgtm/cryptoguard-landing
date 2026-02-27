@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — SHIELD CryptoGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020804;
+  --metal-dark: #0a1a0a;
+  --green: #00ff88;
+  --green-glow: rgba(0,255,136,0.4);
+  --silver: #8ab88a;
+  --silver2: #c8e8c8;
+  --red: #ff2244;
+  --orange: #ff6600;
+  --border: rgba(0,255,136,0.15);
+  --border2: rgba(0,255,136,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: #c8e8c8;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  pointer-events: none;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 64px;
+  background: rgba(2,8,4,0.95);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem; font-weight: 900; letter-spacing: 3px;
+  color: var(--green); text-decoration: none;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+.nav-back {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 2px;
+  color: var(--silver); text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 8px 20px; transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-back:hover { color: var(--green); border-color: var(--green); }
+
+main {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
+  padding: 120px 48px 80px;
+}
+
+.doc-header { margin-bottom: 56px; }
+.doc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 4px;
+  color: var(--green); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.doc-tag::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+.doc-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900; color: var(--silver2);
+  margin-bottom: 12px; line-height: 1.1;
+}
+.doc-title span { color: var(--green); }
+.doc-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem; color: rgba(200,232,200,0.35);
+  line-height: 1.8; max-width: 600px;
+}
+
+/* CATEGORY LABEL */
+.cat-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem; letter-spacing: 4px;
+  color: var(--green); margin: 48px 0 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.cat-label::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+
+/* FAQ ITEM */
+.faq-item {
+  background: var(--metal-dark);
+  border: 1px solid var(--border);
+  margin-bottom: 2px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.faq-item::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; bottom: 0; width: 2px;
+  background: var(--green);
+  opacity: 0; transition: opacity 0.3s;
+}
+.faq-item.open { border-color: rgba(0,255,136,0.3); background: #0d1f0d; }
+.faq-item.open::before { opacity: 1; }
+
+.faq-question {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 28px;
+  cursor: pointer;
+  user-select: none;
+  gap: 16px;
+}
+.faq-q-left { display: flex; align-items: center; gap: 16px; }
+.faq-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.55rem; color: rgba(0,255,136,0.3);
+  letter-spacing: 2px; flex-shrink: 0;
+}
+.faq-q-text {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 1px; color: var(--silver2);
+  line-height: 1.4;
+}
+.faq-item.open .faq-q-text { color: var(--green); }
+
+.faq-toggle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; color: rgba(0,255,136,0.4);
+  flex-shrink: 0; transition: transform 0.3s;
+  width: 24px; text-align: center;
+}
+.faq-item.open .faq-toggle { transform: rotate(45deg); color: var(--green); }
+
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  padding: 0 28px 0 60px;
+}
+.faq-item.open .faq-answer {
+  max-height: 600px;
+  padding: 0 28px 24px 60px;
+}
+.faq-answer p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem; line-height: 1.9;
+  color: rgba(200,232,200,0.5);
+  margin-bottom: 12px;
+}
+.faq-answer p:last-child { margin-bottom: 0; }
+.faq-answer strong { color: var(--silver2); }
+.faq-answer code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.15);
+  padding: 1px 6px; color: var(--green);
+}
+.faq-answer ul {
+  list-style: none; margin: 10px 0;
+}
+.faq-answer ul li {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.76rem; line-height: 1.8;
+  color: rgba(200,232,200,0.45);
+  padding-left: 18px; position: relative;
+  margin-bottom: 4px;
+}
+.faq-answer ul li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--green); font-size: 0.58rem;
+}
+
+/* THREAT BADGE */
+.threat-inline {
+  display: inline-block;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.5rem; font-weight: 700;
+  padding: 2px 7px; letter-spacing: 2px;
+  vertical-align: middle; margin: 0 3px;
+}
+.t-crit { background: var(--red); color: #fff; }
+.t-high { background: var(--orange); color: #fff; }
+.t-med  { background: rgba(0,255,136,0.15); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
+
+/* CTA */
+.cta-box {
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,255,136,0.02));
+  border: 1px solid var(--green);
+  padding: 40px; text-align: center;
+  position: relative; overflow: hidden;
+  margin-top: 56px;
+}
+.cta-box::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.cta-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem; font-weight: 900;
+  color: var(--silver2); margin-bottom: 10px;
+}
+.cta-title span { color: var(--green); }
+.cta-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem; color: rgba(200,232,200,0.35);
+  margin-bottom: 28px; line-height: 1.7;
+}
+.btn-primary {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #00ff88, #00cc6a);
+  color: #000; text-decoration: none; display: inline-block;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(0,255,136,0.3);
+}
+.btn-primary:hover { box-shadow: 0 0 60px rgba(0,255,136,0.6); transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+  background: rgba(2,8,4,0.8);
+}
+.footer-logo { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; letter-spacing:3px; color:var(--green); text-shadow:0 0 20px var(--green-glow); }
+.footer-text { font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:rgba(200,232,200,0.2); }
+.footer-links { display:flex; gap:20px; font-family:'Share Tech Mono',monospace; font-size:0.62rem; }
+.footer-links a { color:rgba(200,232,200,0.3); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:6px; }
+.footer-links a:hover { color:var(--green); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 28 32" fill="none">
+      <defs><linearGradient id="ng5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4dff9f"/><stop offset="100%" stop-color="#00cc6a"/></linearGradient></defs>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" fill="url(#ng5)" opacity="0.12"/>
+      <path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" stroke="url(#ng5)" stroke-width="1.5" fill="none"/>
+      <path d="M9 16l3.5 3.5L19 12" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    SHIELD CRYPTOGUARD
+  </a>
+  <a href="/" class="nav-back">← BACK TO SITE</a>
+</nav>
+
+<main>
+
+  <div class="doc-header">
+    <div class="doc-tag">// KNOWLEDGE BASE</div>
+    <h1 class="doc-title">Frequently Asked <span>Questions</span></h1>
+    <p class="doc-sub">Everything you need to know about SHIELD CryptoGuard's AI security engine, threat detection methodology, and how we protect your wallet in real time across the Web3 ecosystem.</p>
+  </div>
+
+  <!-- CATEGORY 1 -->
+  <div class="cat-label">// 01 — WHAT SHIELD IS</div>
+
+  <div class="faq-item open">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.01</span>
+        <span class="faq-q-text">What exactly is SHIELD CryptoGuard and who built it?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p><strong>SHIELD CryptoGuard</strong> is an AI-powered Web3 security browser extension developed by <strong>Edutech Wise FZCO</strong>, incorporated under the laws of the United Arab Emirates. It functions as a real-time threat intelligence layer that sits between your browser and every Web3 interaction you make — scanning URLs, smart contracts, token approvals, and wallet connection requests before any transaction is signed.</p>
+      <p>Unlike conventional antivirus tools built for Web2 environments, SHIELD was designed from the ground up for the specific and rapidly evolving threat landscape of decentralized finance, NFT platforms, and blockchain protocols. It understands the difference between a legitimate Uniswap router call and a drainer contract masquerading as one.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.02</span>
+        <span class="faq-q-text">Is SHIELD CryptoGuard a finished product or still in development?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>SHIELD is currently in <strong>public beta</strong>. This means the core engine is fully operational and actively protecting users, but the product continues to evolve — new threat categories are being added, detection coverage is expanding across additional EVM chains, and the classification AI is continuously refined based on emerging attack patterns.</p>
+      <p>Being in beta also means we are transparent about limitations: no security tool eliminates 100% of risk, and novel attack vectors may not be detected immediately upon first appearance. SHIELD reduces the attack surface significantly — but always conduct your own due diligence before signing any transaction.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.03</span>
+        <span class="faq-q-text">Which blockchains does SHIELD currently cover?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>SHIELD's threat intelligence engine currently covers the following EVM-compatible networks:</p>
+      <ul>
+        <li>Ethereum Mainnet</li>
+        <li>BNB Chain (BSC)</li>
+        <li>Polygon (MATIC)</li>
+        <li>Arbitrum One</li>
+        <li>Base</li>
+        <li>Avalanche C-Chain</li>
+      </ul>
+      <p>Coverage across additional chains — including Optimism, zkSync, and Linea — is on the development roadmap. Phishing and domain-level threats are chain-agnostic and are detected regardless of which network is active in your wallet.</p>
+    </div>
+  </div>
+
+  <!-- CATEGORY 2 -->
+  <div class="cat-label">// 02 — HOW THE AI ENGINE WORKS</div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.04</span>
+        <span class="faq-q-text">How does SHIELD's AI engine detect phishing sites in real time?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>The moment your browser navigates to any URL, SHIELD's classification engine activates and evaluates the domain against multiple threat vectors simultaneously:</p>
+      <ul>
+        <li><strong>Domain age analysis</strong> — phishing sites are almost always freshly registered. Domains under 30 days old interacting with wallet connection events are flagged immediately.</li>
+        <li><strong>IDN homograph detection</strong> — attackers use Unicode characters visually identical to Latin letters to spoof legitimate domains (e.g., <code>uniswаp.org</code> with a Cyrillic 'а'). SHIELD normalizes all domain strings before comparison.</li>
+        <li><strong>Typosquatting similarity scoring</strong> — the engine computes edit-distance scores against a reference database of 300+ legitimate DeFi protocol domains.</li>
+        <li><strong>SSL certificate provenance</strong> — self-issued or free certificates on domains mimicking established protocols are treated as elevated risk signals.</li>
+        <li><strong>Known-bad infrastructure fingerprinting</strong> — IP ranges, hosting providers, and nameserver patterns associated with previous phishing campaigns are tracked and used to flag new deployments on the same infrastructure.</li>
+      </ul>
+      <p>All of the above runs locally or via a sub-50ms API call — you never see a loading delay and the verdict is rendered before your wallet extension has a chance to prompt you.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.05</span>
+        <span class="faq-q-text">How does SHIELD detect honeypot tokens before I buy?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>A <strong>honeypot contract</strong> is a token engineered to allow unrestricted buying while making it technically impossible — or economically prohibitive — for anyone other than the deployer to sell. Common implementation patterns include:</p>
+      <ul>
+        <li>Hidden <code>require(isWhitelisted[msg.sender])</code> checks inside the <code>_transfer</code> function that revert for non-owner callers</li>
+        <li>Dynamic tax functions that return 100% on sell for addresses not controlled by the deployer</li>
+        <li>Admin-callable functions that toggle a <code>tradingEnabled</code> flag to freeze sells after a pump</li>
+        <li>Fake liquidity locks that expire within hours of token launch</li>
+      </ul>
+      <p>SHIELD dispatches the contract address to an on-chain simulation layer that executes a test sell transaction against the contract bytecode without broadcasting it. If the simulation reverts or returns a zero-value output, SHIELD issues a <span class="threat-inline t-crit">CRITICAL</span> honeypot alert before you execute the buy. This process takes under 800ms on a cold query.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.06</span>
+        <span class="faq-q-text">What is an infinite approval and why is it so dangerous?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>An <strong>infinite approval</strong> is when a smart contract requests permission to spend the maximum possible amount of an ERC-20 token from your wallet — <code>type(uint256).max</code> — rather than only the amount required for the current transaction. This is the most prevalent wallet drain vector in DeFi today.</p>
+      <p>Once granted, the approved contract can drain your entire token balance at any point in the future — even months later, and even after you have stopped using the protocol. If that contract is later exploited, upgraded maliciously, or was designed as a drainer from the start, your full balance is at risk with no further action required from you.</p>
+      <p>SHIELD intercepts every approval transaction before your wallet signs it, decodes the <code>spender</code> address and <code>amount</code> parameter, and presents you with a clear warning if an infinite spend is being requested. It then recommends approving only the exact amount needed for the current operation. This single feature prevents the majority of DeFi wallet drain incidents.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.07</span>
+        <span class="faq-q-text">How does SHIELD's blacklist stay current? Is it updated manually?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>No. SHIELD's threat database is <strong>not manually curated</strong> — it is driven by an automated on-chain monitoring system that operates continuously across all covered networks. The system tracks:</p>
+      <ul>
+        <li>Newly deployed smart contracts and their bytecode similarity to known drainer families</li>
+        <li>Deployer wallet histories — if an address has previously launched contracts that were flagged, new deployments from that address inherit elevated risk scores</li>
+        <li>Liquidity event anomalies — coordinated liquidity removal patterns that match historical rugpull signatures</li>
+        <li>Domain registration feeds — newly registered domains containing DeFi protocol keywords are immediately evaluated</li>
+        <li>Social signal correlation — community-reported scam campaigns are cross-referenced with on-chain activity to confirm and propagate threat verdicts</li>
+      </ul>
+      <p>The threat database refreshes across all active SHIELD instances every <strong>6 hours maximum</strong>, via a signed and encrypted pull — no Chrome Web Store update required. This over-the-air intelligence system means SHIELD responds to new threats in hours, not weeks.</p>
+    </div>
+  </div>
+
+  <!-- CATEGORY 3 -->
+  <div class="cat-label">// 03 — SPECIFIC THREAT TYPES</div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.08</span>
+        <span class="faq-q-text">What is address poisoning and how does SHIELD protect against it?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p><strong>Address poisoning</strong> is an attack where a threat actor sends zero-value or dust transactions to your wallet from a vanity address that is visually identical to an address you have previously interacted with — matching the first 4-6 and last 4-6 characters. The goal is to contaminate your transaction history so that when you copy-paste a recent address, you accidentally select the attacker's address instead of the legitimate one.</p>
+      <p>This attack requires no smart contract interaction, no phishing page, and no malware. It exploits the human tendency to verify only the beginning and end of a long hex string. Losses from address poisoning have exceeded tens of millions of dollars across documented incidents.</p>
+      <p>SHIELD detects similarity patterns between addresses in your active transaction context and known poisoning wallets in its threat database, issuing a <span class="threat-inline t-high">HIGH</span> alert before any outbound transfer is broadcast.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.09</span>
+        <span class="faq-q-text">How does SHIELD identify rugpull risk before a token collapses?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Rugpulls share a recognizable on-chain fingerprint that SHIELD's engine is trained to identify. Key risk indicators include:</p>
+      <ul>
+        <li><strong>Liquidity lock expiry</strong> — liquidity locked for less than 30 days signals that the team retains the ability to remove it imminently</li>
+        <li><strong>Admin key concentration</strong> — contracts where a single EOA controls mint, pause, and upgrade functions represent a single point of failure and malicious intent risk</li>
+        <li><strong>Upgradeable proxy patterns without timelock</strong> — proxies that can be pointed to new implementation contracts without a governance delay allow instant rug execution</li>
+        <li><strong>Deployer wallet history</strong> — wallets that have previously deployed tokens that were rugpulled are flagged regardless of the new token's apparent legitimacy</li>
+        <li><strong>Team allocation concentration</strong> — wallets holding >30% of total supply with no vesting schedule are capable of single-transaction price collapse</li>
+      </ul>
+      <p>SHIELD does not guarantee detection of all rugpulls — particularly well-structured long-con operations — but surfaces all available risk signals clearly before you commit capital.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.10</span>
+        <span class="faq-q-text">Can SHIELD detect malicious airdrop tokens that appear in my wallet?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Yes. <strong>Malicious airdrop tokens</strong> — sometimes called "dusting attacks" in the DeFi context — are unsolicited tokens sent to your wallet specifically to lure you to a fraudulent claim site. The playbook is consistent: you see an unknown token with an apparently high USD value in your wallet, you visit the site linked in the token's contract metadata to "claim" or "sell" it, and the site either harvests your seed phrase or prompts you to sign a <code>SetApprovalForAll</code> transaction that empties your NFT holdings, or an infinite ERC-20 approval that drains your tokens.</p>
+      <p>SHIELD flags unknown tokens that appear in your wallet without any prior transaction history linking you to the deployer, particularly when those tokens reference recently registered domains in their contract metadata. These receive a <span class="threat-inline t-crit">CRITICAL</span> or <span class="threat-inline t-high">HIGH</span> classification depending on confirmed domain threat status.</p>
+    </div>
+  </div>
+
+  <!-- CATEGORY 4 -->
+  <div class="cat-label">// 04 — PRIVACY & DATA</div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.11</span>
+        <span class="faq-q-text">Does SHIELD access my private keys or seed phrase?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p><strong>Absolutely not.</strong> SHIELD CryptoGuard never requests, reads, stores, or transmits your private keys, seed phrase, or any wallet credential. The extension operates exclusively on publicly visible data: URLs, smart contract addresses, on-chain transaction parameters, and token approval metadata that is already exposed to the browser environment at the moment of signing.</p>
+      <p>Any tool — browser extension or otherwise — that requests your seed phrase is attempting to steal your wallet. SHIELD will never ask for this information under any circumstance, and if you encounter a prompt claiming to be SHIELD requesting your seed phrase, you are looking at a phishing attack impersonating our product.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.12</span>
+        <span class="faq-q-text">What data does SHIELD collect and transmit when I use it?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>SHIELD operates on a strict <strong>minimal data collection principle</strong>. When a threat query is required, the extension transmits only the specific data point being evaluated — a domain string or a contract address — to SHIELD's backend API. This data is processed transiently for threat classification and is not stored as a persistent record linked to your identity.</p>
+      <p>SHIELD does not track your browsing history, does not build a behavioral profile, does not store your wallet address in our databases, and does not sell or share any user data with third parties for commercial purposes. Your subscription email (if you are a PRO user) is held by Stripe and is used exclusively for billing communications.</p>
+      <p>Full details are in our <a href="/privacy.html" style="color:var(--green);text-decoration:none;">Privacy Policy</a>.</p>
+    </div>
+  </div>
+
+  <!-- CATEGORY 5 -->
+  <div class="cat-label">// 05 — PLANS & SUBSCRIPTION</div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.13</span>
+        <span class="faq-q-text">What is the difference between the Free and PRO Shield plans?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>The <strong>Free tier</strong> provides essential phishing and domain protection, access to the public threat blacklist, and up to 5 smart contract analyses per day. It is suitable for occasional Web3 users who interact primarily with well-established protocols.</p>
+      <p>The <strong>PRO Shield</strong> plan ($9/month, 7-day free trial included) unlocks the full threat detection stack:</p>
+      <ul>
+        <li>Unlimited smart contract analyses with full bytecode-level honeypot simulation</li>
+        <li>Infinite approval interception and transaction firewall</li>
+        <li>Real-time alerts for rugpull risk, address poisoning, and malicious airdrop tokens</li>
+        <li>Access to the premium threat intelligence database updated every 6 hours</li>
+        <li>Priority threat verdict processing</li>
+      </ul>
+      <p>For anyone actively trading on DEXs, interacting with new protocols, or holding significant on-chain value, PRO Shield provides the full protection stack that the threat environment demands.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.14</span>
+        <span class="faq-q-text">Can I cancel my PRO subscription at any time?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Yes. PRO Shield subscriptions can be cancelled at any time through your Stripe billing portal with no penalty and no lock-in period. Cancellation takes effect at the end of your current billing cycle — you retain full PRO access until that date. No questions asked, no retention flows, no dark patterns.</p>
+      <p>The 7-day free trial period will not be charged if cancelled before it expires.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <div class="faq-q-left">
+        <span class="faq-num">Q.15</span>
+        <span class="faq-q-text">Does SHIELD guarantee I will never lose funds to a Web3 attack?</span>
+      </div>
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer">
+      <p><strong>No — and any tool that makes this claim is being dishonest with you.</strong> The Web3 threat landscape evolves faster than any detection system can perfectly track. Novel attack architectures, zero-day contract exploits, and highly sophisticated social engineering campaigns may not be identified by SHIELD's current detection logic at the moment of first deployment.</p>
+      <p>What SHIELD provides is a <strong>significant and continuously improving reduction of the attack surface</strong> — covering the majority of threat categories that account for the overwhelming proportion of documented on-chain losses. It is a security layer, not a guarantee. The responsibility for due diligence, transaction verification, and safe key management always remains with you.</p>
+      <p>We say this not to diminish the value of the product, but because we believe users who understand the actual protection model make better decisions than users who believe they are fully invincible.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-title">Still have questions? <span>Read the full docs.</span></div>
+    <div class="cta-sub">
+      Our How It Works page covers the full 5-layer detection architecture in technical detail.<br>
+      Or install SHIELD and let the engine speak for itself.
+    </div>
+    <a href="/how-it-works.html" class="btn-primary" style="margin-right:12px;">// HOW IT WORKS</a>
+    <a href="https://buy.stripe.com/8x25kEcqicQg3bmdBY7N601" class="btn-primary">🛡 TRY PRO FREE — 7 DAYS</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
+  <div class="footer-text">© 2026 Edutech Wise FZCO — United Arab Emirates</div>
+  <div class="footer-links">
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="https://x.com/cryptoguard18" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.258 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      @CRYPTOGUARD18
+    </a>
+    <a href="https://github.com/tradewr333-lgtm/cryptoguard-extension" target="_blank">
+      <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      OPEN SOURCE
+    </a>
+  </div>
+</footer>
+
+<script>
+function toggle(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  // open clicked if it was closed
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>
