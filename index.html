@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- disableEmailObfuscation -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHIELD CryptoGuard — Web3 Antivirus</title>
@@ -1103,7 +1104,7 @@ footer {
     <a href="/faq.html">FAQ</a>
     <a href="/terms.html">Terms of Service</a>
     <a href="/faq.html">FAQ</a>
-    <a href="mailto:contact@cryptoguard.site">
+    <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;contact&#64;cryptoguard&#46;site">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       CONTACT
     </a>
@@ -1118,18 +1119,10 @@ footer {
   </div>
 </footer>
 
-<script src="https://js.stripe.com/v3/"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
 <script>
 const stripe = Stripe('pk_live_51T3bDzLYcvGWEVUxMaURZjseJUycPdhNP1Z9oAuE3kwnYEr1ni8mhYY3A6lTCX5XE9bRi2265tPEdVzF8Sr2MKlW00w6yByJV2');
 document.querySelectorAll('a').forEach(btn => {
   const t = btn.textContent.trim();
   if (t.includes('PRO') || t.includes('ACTIVATE')) {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      window.location.href = 'https://buy.stripe.com/8x25kEcqicQg3bmdBY7N601';
-    });
-  }
-});
-</script>
-</body>
-</html>
+    btn.addEventListener('click',
