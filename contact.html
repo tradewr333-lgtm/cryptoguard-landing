@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — SHIELD CryptoGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #020804; --green: #00ff88; --green-glow: rgba(0,255,136,0.4);
+  --silver: #8ab88a; --silver2: #c8e8c8; --border: rgba(0,255,136,0.15);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:#c8e8c8; font-family:'Rajdhani',sans-serif; min-height:100vh; }
+body::before { content:''; position:fixed; inset:0; z-index:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px); pointer-events:none; }
+nav { position:fixed; top:0; left:0; right:0; z-index:1000; display:flex; justify-content:space-between; align-items:center; padding:0 48px; height:64px; background:rgba(2,8,4,0.95); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); }
+.nav-logo { display:flex; align-items:center; gap:12px; font-family:'Orbitron',monospace; font-size:0.82rem; font-weight:900; letter-spacing:3px; color:var(--green); text-decoration:none; text-shadow:0 0 20px var(--green-glow); }
+.nav-back { font-family:'Share Tech Mono',monospace; font-size:0.68rem; letter-spacing:2px; color:var(--silver); text-decoration:none; border:1px solid var(--border); padding:8px 20px; transition:all 0.3s; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); }
+.nav-back:hover { color:var(--green); border-color:var(--green); }
+main { position:relative; z-index:1; max-width:640px; margin:0 auto; padding:120px 48px 80px; }
+.doc-tag { font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:4px; color:var(--green); margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+.doc-tag::before { content:''; width:24px; height:1px; background:var(--green); }
+.doc-title { font-family:'Orbitron',monospace; font-size:clamp(1.8rem,4vw,2.6rem); font-weight:900; color:var(--silver2); margin-bottom:12px; }
+.doc-title span { color:var(--green); }
+.doc-sub { font-family:'Share Tech Mono',monospace; font-size:0.75rem; color:rgba(200,232,200,0.35); line-height:1.8; margin-bottom:48px; }
+.email-card { background:#0a1a0a; border:1px solid var(--border); padding:40px; position:relative; overflow:hidden; margin-bottom:24px; }
+.email-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--green),transparent); }
+.email-label { font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:3px; color:rgba(0,255,136,0.4); margin-bottom:16px; }
+.email-address { font-family:'Orbitron',monospace; font-size:1.2rem; font-weight:700; color:var(--green); text-shadow:0 0 20px var(--green-glow); margin-bottom:24px; word-break:break-all; }
+.copy-btn { font-family:'Orbitron',monospace; font-size:0.65rem; font-weight:700; letter-spacing:2px; padding:12px 28px; background:linear-gradient(135deg,#00ff88,#00cc6a); color:#000; border:none; cursor:pointer; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:all 0.3s; box-shadow:0 0 20px rgba(0,255,136,0.3); }
+.copy-btn:hover { box-shadow:0 0 40px rgba(0,255,136,0.6); transform:translateY(-2px); }
+.copy-btn.copied { background:linear-gradient(135deg,#00cc6a,#009950); }
+.info-box { background:#0a1a0a; border:1px solid rgba(0,255,136,0.08); padding:24px 28px; }
+.info-box p { font-family:'Share Tech Mono',monospace; font-size:0.75rem; color:rgba(200,232,200,0.35); line-height:1.8; }
+.info-box strong { color:rgba(200,232,200,0.6); }
+footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:32px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; background:rgba(2,8,4,0.8); }
+.footer-logo { font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:900; letter-spacing:3px; color:var(--green); text-shadow:0 0 20px var(--green-glow); }
+.footer-text { font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:rgba(200,232,200,0.2); }
+.footer-links { display:flex; gap:20px; font-family:'Share Tech Mono',monospace; font-size:0.62rem; }
+.footer-links a { color:rgba(200,232,200,0.3); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:6px; }
+.footer-links a:hover { color:var(--green); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 28 32" fill="none"><defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4dff9f"/><stop offset="100%" stop-color="#00cc6a"/></linearGradient></defs><path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" fill="url(#ng)" opacity="0.12"/><path d="M14 1L1 6v9c0 8.3 5.5 15.2 13 17.9C21.5 30.2 27 23.3 27 15V6L14 1z" stroke="url(#ng)" stroke-width="1.5" fill="none"/><path d="M9 16l3.5 3.5L19 12" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    SHIELD CRYPTOGUARD
+  </a>
+  <a href="/" class="nav-back">← BACK TO SITE</a>
+</nav>
+
+<main>
+  <div class="doc-tag">// GET IN TOUCH</div>
+  <h1 class="doc-title">Contact <span>SHIELD</span></h1>
+  <p class="doc-sub">For support, security reports, partnership inquiries, or any questions about your subscription — reach us directly at the address below.</p>
+
+  <div class="email-card">
+    <div class="email-label">// OFFICIAL CONTACT EMAIL</div>
+    <div class="email-address" id="emailAddr">contact@cryptoguard.site</div>
+    <button class="copy-btn" id="copyBtn" onclick="copyEmail()">📋 COPY EMAIL ADDRESS</button>
+  </div>
+
+  <div class="info-box">
+    <p>
+      <strong>Response time:</strong> within 48 hours on business days.<br><br>
+      <strong>Security reports:</strong> if you have found a vulnerability or want to report a scam not yet in our database, please include as much technical detail as possible.<br><br>
+      <strong>Subscription support:</strong> include your registered email address and a description of the issue.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
+  <div class="footer-text">© 2026 Edutech Wise FZCO — United Arab Emirates</div>
+  <div class="footer-links">
+    <a href="/faq.html">FAQ</a>
+    <a href="/features.html">Features</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="https://x.com/cryptoguard18" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.258 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      @CRYPTOGUARD18
+    </a>
+  </div>
+</footer>
+
+<script>
+function copyEmail() {
+  const email = 'contact@cryptoguard.site';
+  navigator.clipboard.writeText(email).then(function() {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ COPIED!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = '📋 COPY EMAIL ADDRESS';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+</script>
+</body>
+</html>
