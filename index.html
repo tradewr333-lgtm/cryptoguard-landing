@@ -1118,10 +1118,17 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
 <script>
-const stripe = Stripe('pk_live_51T3bDzLYcvGWEVUxMaURZjseJUycPdhNP1Z9oAuE3kwnYEr1ni8mhYY3A6lTCX5XE9bRi2265tPEdVzF8Sr2MKlW00w6yByJV2');
 document.querySelectorAll('a').forEach(btn => {
   const t = btn.textContent.trim();
   if (t.includes('PRO') || t.includes('ACTIVATE')) {
-    btn.addEventListener('click',
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open('https://buy.stripe.com/8x25kEcqicQg3bmdBY7N601', '_blank');
+    });
+  }
+});
+</script>
+
+</body>
+</html>
