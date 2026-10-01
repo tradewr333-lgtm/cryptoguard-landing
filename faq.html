@@ -454,9 +454,14 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function toggle(el) {
   const item = el.parentElement;
   const isOpen = item.classList.contains('open');
-  // close all
-  document.querySelectorAll('.faq-i
+  document.querySelectorAll('.faq-item.open').forEach(function (x) { x.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>
