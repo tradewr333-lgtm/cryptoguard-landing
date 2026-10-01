@@ -360,7 +360,7 @@ footer {
         <li>Admin-callable functions that toggle a <code>tradingEnabled</code> flag to freeze sells after a pump</li>
         <li>Fake liquidity locks that expire within hours of token launch</li>
       </ul>
-      <p>SHIELD dispatches the contract address to an on-chain simulation layer that executes a test sell transaction against the contract bytecode without broadcasting it. If the simulation reverts or returns a zero-value output, SHIELD issues a <span class="threat-inline t-crit">CRITICAL</span> honeypot alert before you execute the buy.</p>
+      <p>With PRO, SHIELD sends the contract address to the GoPlus Security token-security API. If GoPlus flags the token as a honeypot, or reports a sell tax above 49%, SHIELD issues a <span class="threat-inline t-crit">CRITICAL</span> alert before you execute the buy.</p>
     </div>
   </div>
 

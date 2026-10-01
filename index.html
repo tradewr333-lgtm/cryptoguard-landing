@@ -290,7 +290,8 @@ nav {
 }
 
 /* FEATURES */
-.features { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
+.features { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+@media (max-width:900px){ .features { grid-template-columns:1fr; } }
 .feat {
   background:var(--metal-dark); border:1px solid var(--border);
   padding:40px; position:relative; overflow:hidden; transition:all 0.4s;
@@ -834,8 +835,8 @@ footer {
 
 <section class="section">
   <div class="section-tag">// PROTECTION LAYERS</div>
-  <h2 class="section-h">4 Shields of<br><span>Active Defense</span></h2>
-  <p class="section-p">Every Web3 interaction passes through 4 automatic security checks before you confirm anything.</p>
+  <h2 class="section-h">3 Layers of<br><span>Protection</span></h2>
+  <p class="section-p">Phishing and approval checks run automatically on every page. Contract checks run on demand from the SHIELD popup (PRO).</p>
   <div class="features">
     <div class="feat">
       <div class="feat-num">01 — ANTI-PHISHING</div>
@@ -847,19 +848,13 @@ footer {
       <div class="feat-num">02 — CONTRACT ANALYSIS</div>
       <div class="feat-icon-inner">🍯</div>
       <div class="feat-title">HONEYPOT DETECTOR</div>
-      <div class="feat-desc">Analyzes contracts via GoPlus Security API before you buy (PRO). Detects honeypot traps, high sell taxes, and ownership risks.</div>
+      <div class="feat-desc">Paste a token contract address into the SHIELD popup to check it with GoPlus Security before you buy (PRO, Ethereum mainnet). Flags honeypots, high sell taxes and ownership risks.</div>
     </div>
     <div class="feat">
       <div class="feat-num">03 — APPROVAL GUARD</div>
       <div class="feat-icon-inner">🔓</div>
       <div class="feat-title">APPROVAL BLOCKER</div>
       <div class="feat-desc">Warns when you grant infinite permission for a contract to spend your tokens. Suggests limiting to the required amount before confirming.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-num">04 — THREAT DATABASE</div>
-      <div class="feat-icon-inner">🚫</div>
-      <div class="feat-title">SCAMMER BLACKLIST</div>
-      <div class="feat-desc">Known phishing domains and suspicious URL patterns, checked on every page visit. Phishing database refreshed every 6 hours from CryptoScamDB data.</div>
     </div>
   </div>
 </section>
@@ -874,7 +869,7 @@ footer {
     <div class="showcase-text">
       <div class="section-tag">// AI CONTRACT ANALYSIS</div>
       <h2 class="section-h">Risk Score for<br><span>Every Contract</span></h2>
-      <p class="section-p">Before you interact with any smart contract, SHIELD runs a GoPlus Security check (PRO). Honeypot traps, hidden ownership, high sell taxes, and mintable supply flagged before you confirm anything.</p>
+      <p class="section-p">Paste any token contract address into the SHIELD popup (PRO) and SHIELD checks it with GoPlus Security: honeypot flag, sell tax, hidden or reclaimable ownership, mintable supply and holder count.</p>
     </div>
     <div class="popup-stage">
       <!-- Main popup: SAFE contract -->
@@ -941,7 +936,7 @@ footer {
     <div class="showcase-text">
       <div class="section-tag" style="color:var(--red)">// MALWARE CONTRACT DETECTION</div>
       <h2 class="section-h">Block Malware<br><span style="color:var(--red)">Smart Contracts</span></h2>
-      <p class="section-p">SHIELD checks smart contracts via GoPlus Security API (PRO) before a single token leaves your wallet. Honeypot traps, high sell taxes, hidden ownership, and mintable supply — flagged before you confirm.</p>
+      <p class="section-p">If GoPlus flags a token as a honeypot, or reports a sell tax above 49%, SHIELD shows a CRITICAL alert in the popup. Check before you buy (PRO, Ethereum mainnet).</p>
     </div>
     <div class="popup-stage danger">
       <!-- Main popup: CRITICAL threat -->
