@@ -264,23 +264,24 @@ footer {
   <div class="doc-header">
     <div class="doc-tag">// KNOWLEDGE BASE</div>
     <h1 class="doc-title">Frequently Asked <span>Questions</span></h1>
-    <p class="doc-sub">Everything you need to know about SHIELD CryptoGuard's AI security engine, threat detection methodology, and how we protect your wallet in real time across the Web3 ecosystem.</p>
+    <p class="doc-sub">Plain answers about what SHIELD CryptoGuard does today, and what it does not.</p>
   </div>
 
-  <!-- CATEGORY 1 -->
-  <div class="cat-label">// 01 — WHAT SHIELD IS</div>
+    <div class="cat-label">// 01 &mdash; WHAT SHIELD DOES</div>
 
   <div class="faq-item open">
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.01</span>
-        <span class="faq-q-text">What exactly is SHIELD CryptoGuard and who built it?</span>
+        <span class="faq-q-text">What is SHIELD CryptoGuard and who operates it?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p><strong>SHIELD CryptoGuard</strong> is an AI-powered Web3 security browser extension developed by <strong>Marbella Collins LLC</strong>, incorporated under the laws of the Florida, USA. It functions as a real-time threat intelligence layer that sits between your browser and every Web3 interaction you make — scanning URLs, smart contracts, token approvals, and wallet connection requests before any transaction is signed.</p>
-      <p>Unlike conventional antivirus tools built for Web2 environments, SHIELD was designed from the ground up for the specific and rapidly evolving threat landscape of decentralized finance, NFT platforms, and blockchain protocols. It understands the difference between a legitimate Uniswap router call and a drainer contract masquerading as one.</p>
+      <p><strong>SHIELD CryptoGuard</strong> is a Chrome extension in <strong>public beta</strong>,
+         operated by <strong>Marbella Collins LLC</strong>, a Florida (USA) limited liability company.
+         It does three things: it checks sites for phishing, it warns you about unlimited token
+         approvals, and (PRO) it checks token contracts with GoPlus Security.</p>
     </div>
   </div>
 
@@ -288,13 +289,17 @@ footer {
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.02</span>
-        <span class="faq-q-text">Is SHIELD CryptoGuard a finished product or still in development?</span>
+        <span class="faq-q-text">How does the phishing check work?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>SHIELD is currently in <strong>public beta</strong>. This means the core engine is fully operational and actively protecting users, but the product continues to evolve — new threat categories are being added, detection coverage is expanding across additional EVM chains, and the classification AI is continuously refined based on emerging attack patterns.</p>
-      <p>Being in beta also means we are transparent about limitations: no security tool eliminates 100% of risk, and novel attack vectors may not be detected immediately upon first appearance. SHIELD reduces the attack surface significantly — but always conduct your own due diligence before signing any transaction.</p>
+      <p>On every page you open, SHIELD compares the domain with a list of known phishing domains
+         (a built-in list plus CryptoScamDB data, refreshed every 6 hours) and with a list of legitimate
+         crypto sites, to catch look-alike names. If the domain matches, SHIELD shows a warning on the
+         page and a browser notification. Suspicious URL patterns (such as &ldquo;airdrop&rdquo; or
+         &ldquo;claim reward&rdquo;) appear as MEDIUM risk when you open the SHIELD popup.
+         SHIELD only knows the domains and patterns on these lists.</p>
     </div>
   </div>
 
@@ -302,45 +307,30 @@ footer {
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.03</span>
-        <span class="faq-q-text">Which blockchains does SHIELD currently cover?</span>
+        <span class="faq-q-text">What does the unlimited approval warning do?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>SHIELD's threat intelligence engine currently covers the following EVM-compatible networks:</p>
-      <ul>
-        <li>Ethereum Mainnet</li>
-        <li>BNB Chain (BSC)</li>
-        <li>Polygon (MATIC)</li>
-        <li>Arbitrum One</li>
-        <li>Base</li>
-        <li>Avalanche C-Chain</li>
-      </ul>
-      <p>Coverage across additional chains — including Optimism, zkSync, and Linea — is on the development roadmap. Phishing and domain-level threats are chain-agnostic and are detected regardless of which network is active in your wallet.</p>
+      <p>When a site asks your wallet to approve a very large (unlimited) amount of an ERC-20 token,
+         SHIELD shows a warning on the page and suggests setting a spending limit in your wallet.
+         It does not block the transaction: you decide.</p>
     </div>
   </div>
-
-  <!-- CATEGORY 2 -->
-  <div class="cat-label">// 02 — HOW THE AI ENGINE WORKS</div>
 
   <div class="faq-item">
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.04</span>
-        <span class="faq-q-text">How does SHIELD's AI engine detect phishing sites in real time?</span>
+        <span class="faq-q-text">How does the honeypot check work? (PRO)</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>The moment your browser navigates to any URL, SHIELD's classification engine activates and evaluates the domain against multiple threat vectors simultaneously:</p>
-      <ul>
-        <li><strong>Domain age analysis</strong> — phishing sites are almost always freshly registered. Domains under 30 days old interacting with wallet connection events are flagged immediately.</li>
-        <li><strong>IDN homograph detection</strong> — attackers use Unicode characters visually identical to Latin letters to spoof legitimate domains (e.g., <code>uniswаp.org</code> with a Cyrillic 'а'). SHIELD normalizes all domain strings before comparison.</li>
-        <li><strong>Typosquatting similarity scoring</strong> — the engine computes edit-distance scores against a reference database of 300+ legitimate DeFi protocol domains.</li>
-        <li><strong>SSL certificate provenance</strong> — self-issued or free certificates on domains mimicking established protocols are treated as elevated risk signals.</li>
-        <li><strong>Known-bad infrastructure fingerprinting</strong> — IP ranges, hosting providers, and nameserver patterns associated with previous phishing campaigns are tracked and used to flag new deployments on the same infrastructure.</li>
-      </ul>
-      <p>All of the above runs locally in your browser — the verdict is rendered before your wallet extension has a chance to prompt you.</p>
+      <p>Paste a token contract address into the SHIELD popup. SHIELD asks the GoPlus Security
+         token-security API (Ethereum mainnet) and shows what GoPlus reports: honeypot flag, sell tax
+         above 10% (critical above 49%), hidden or reclaimable ownership, mintable supply, fewer than
+         50 holders. The result comes from GoPlus; SHIELD does not verify it independently.</p>
     </div>
   </div>
 
@@ -348,34 +338,29 @@ footer {
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.05</span>
-        <span class="faq-q-text">How does SHIELD detect honeypot tokens before I buy?</span>
+        <span class="faq-q-text">Which networks are covered?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>A <strong>honeypot contract</strong> is a token engineered to allow unrestricted buying while making it technically impossible — or economically prohibitive — for anyone other than the deployer to sell. Common implementation patterns include:</p>
-      <ul>
-        <li>Hidden <code>require(isWhitelisted[msg.sender])</code> checks inside the <code>_transfer</code> function that revert for non-owner callers</li>
-        <li>Dynamic tax functions that return 100% on sell for addresses not controlled by the deployer</li>
-        <li>Admin-callable functions that toggle a <code>tradingEnabled</code> flag to freeze sells after a pump</li>
-        <li>Fake liquidity locks that expire within hours of token launch</li>
-      </ul>
-      <p>With PRO, SHIELD sends the contract address to the GoPlus Security token-security API. If GoPlus flags the token as a honeypot, or reports a sell tax above 49%, SHIELD issues a <span class="threat-inline t-crit">CRITICAL</span> alert before you execute the buy.</p>
+      <p>Phishing checks and approval warnings work on any website, whatever network your wallet uses.
+         The PRO contract check covers Ethereum mainnet only.</p>
     </div>
   </div>
+
+  <div class="cat-label">// 02 &mdash; PRIVACY &amp; DATA</div>
 
   <div class="faq-item">
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.06</span>
-        <span class="faq-q-text">What is an infinite approval and why is it so dangerous?</span>
+        <span class="faq-q-text">Does SHIELD access my private keys or seed phrase?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>An <strong>infinite approval</strong> is when a smart contract requests permission to spend the maximum possible amount of an ERC-20 token from your wallet — <code>type(uint256).max</code> — rather than only the amount required for the current transaction. This is the most prevalent wallet drain vector in DeFi today.</p>
-      <p>Once granted, the approved contract can drain your entire token balance at any point in the future — even months later, and even after you have stopped using the protocol. If that contract is later exploited, upgraded maliciously, or was designed as a drainer from the start, your full balance is at risk with no further action required from you.</p>
-      <p>SHIELD intercepts every approval transaction before your wallet signs it, decodes the <code>spender</code> address and <code>amount</code> parameter, and presents you with a clear warning if an infinite spend is being requested. It then recommends approving only the exact amount needed for the current operation. This single feature prevents the majority of DeFi wallet drain incidents.</p>
+      <p><strong>No.</strong> SHIELD never asks for, reads or stores private keys or seed phrases.
+         Anything claiming to be SHIELD and asking for your seed phrase is a scam.</p>
     </div>
   </div>
 
@@ -383,38 +368,31 @@ footer {
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.07</span>
-        <span class="faq-q-text">How does SHIELD's blacklist stay current? Is it updated manually?</span>
+        <span class="faq-q-text">What data leaves my browser?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>No. SHIELD's threat database is <strong>not manually curated</strong> — it is driven by an automated on-chain monitoring system that operates continuously across all covered networks. The system tracks:</p>
-      <ul>
-        <li>Newly deployed smart contracts and their bytecode similarity to known drainer families</li>
-        <li>Deployer wallet histories — if an address has previously launched contracts that were flagged, new deployments from that address inherit elevated risk scores</li>
-        <li>Liquidity event anomalies — coordinated liquidity removal patterns that match historical rugpull signatures</li>
-        <li>Domain registration feeds — newly registered domains containing DeFi protocol keywords are immediately evaluated</li>
-        <li>Social signal correlation — community-reported scam campaigns are cross-referenced with on-chain activity to confirm and propagate threat verdicts</li>
-      </ul>
-      <p>The phishing domain list refreshes every <strong>6 hours</strong> from CryptoScamDB data — no Chrome Web Store update required.</p>
+      <p>Phishing checks run in your browser; SHIELD downloads the CryptoScamDB list from GitHub.
+         With PRO, the contract address you paste is sent to GoPlus Security. If you log in, your email
+         is sent to our server to check your subscription. Details are in our
+         <a href="/privacy.html" style="color:var(--green)">Privacy Policy</a>.</p>
     </div>
   </div>
 
-  <!-- CATEGORY 3 -->
-  <div class="cat-label">// 03 — SPECIFIC THREAT TYPES</div>
+  <div class="cat-label">// 03 &mdash; PLANS</div>
 
   <div class="faq-item">
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.08</span>
-        <span class="faq-q-text">What is address poisoning and how does SHIELD protect against it?</span>
+        <span class="faq-q-text">What is the difference between Free and PRO?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p><strong>Address poisoning</strong> is an attack where a threat actor sends zero-value or dust transactions to your wallet from a vanity address that is visually identical to an address you have previously interacted with — matching the first 4-6 and last 4-6 characters. The goal is to contaminate your transaction history so that when you copy-paste a recent address, you accidentally select the attacker's address instead of the legitimate one.</p>
-      <p>This attack requires no smart contract interaction, no phishing page, and no malware. It exploits the human tendency to verify only the beginning and end of a long hex string. Losses from address poisoning have exceeded tens of millions of dollars across documented incidents.</p>
-      <p>SHIELD detects similarity patterns between addresses in your active transaction context and known poisoning wallets in its threat database, issuing a <span class="threat-inline t-high">HIGH</span> alert before any outbound transfer is broadcast.</p>
+      <p><strong>Free:</strong> phishing checks, unlimited approval warnings and alerts.
+         <strong>PRO</strong> ($9/month, 7-day free trial): adds the GoPlus contract check in the popup.</p>
     </div>
   </div>
 
@@ -422,20 +400,13 @@ footer {
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.09</span>
-        <span class="faq-q-text">How does SHIELD identify rugpull risk before a token collapses?</span>
+        <span class="faq-q-text">Can I cancel PRO at any time?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>Rugpulls share a recognizable on-chain fingerprint that SHIELD's engine is trained to identify. Key risk indicators include:</p>
-      <ul>
-        <li><strong>Liquidity lock expiry</strong> — liquidity locked for less than 30 days signals that the team retains the ability to remove it imminently</li>
-        <li><strong>Admin key concentration</strong> — contracts where a single EOA controls mint, pause, and upgrade functions represent a single point of failure and malicious intent risk</li>
-        <li><strong>Upgradeable proxy patterns without timelock</strong> — proxies that can be pointed to new implementation contracts without a governance delay allow instant rug execution</li>
-        <li><strong>Deployer wallet history</strong> — wallets that have previously deployed tokens that were rugpulled are flagged regardless of the new token's apparent legitimacy</li>
-        <li><strong>Team allocation concentration</strong> — wallets holding >30% of total supply with no vesting schedule are capable of single-transaction price collapse</li>
-      </ul>
-      <p>SHIELD does not guarantee detection of all rugpulls — particularly well-structured long-con operations — but surfaces all available risk signals clearly before you commit capital.</p>
+      <p>Yes. Cancellation takes effect at the end of the current billing period. If you cancel during
+         the 7-day trial, you are not charged. Questions: contact@cryptoguard.site.</p>
     </div>
   </div>
 
@@ -443,111 +414,22 @@ footer {
     <div class="faq-question" onclick="toggle(this)">
       <div class="faq-q-left">
         <span class="faq-num">Q.10</span>
-        <span class="faq-q-text">Can SHIELD detect malicious airdrop tokens that appear in my wallet?</span>
+        <span class="faq-q-text">Does SHIELD guarantee I will not lose funds?</span>
       </div>
       <span class="faq-toggle">+</span>
     </div>
     <div class="faq-answer">
-      <p>Yes. <strong>Malicious airdrop tokens</strong> — sometimes called "dusting attacks" in the DeFi context — are unsolicited tokens sent to your wallet specifically to lure you to a fraudulent claim site. The playbook is consistent: you see an unknown token with an apparently high USD value in your wallet, you visit the site linked in the token's contract metadata to "claim" or "sell" it, and the site either harvests your seed phrase or prompts you to sign a <code>SetApprovalForAll</code> transaction that empties your NFT holdings, or an infinite ERC-20 approval that drains your tokens.</p>
-      <p>SHIELD flags unknown tokens that appear in your wallet without any prior transaction history linking you to the deployer, particularly when those tokens reference recently registered domains in their contract metadata. These receive a <span class="threat-inline t-crit">CRITICAL</span> or <span class="threat-inline t-high">HIGH</span> classification depending on confirmed domain threat status.</p>
+      <p><strong>No.</strong> SHIELD is in beta. It reduces, but does not eliminate, risk: it only knows
+         the phishing domains on its lists, it only warns about very large approvals, and contract
+         results depend on GoPlus. Always check before you sign.</p>
     </div>
   </div>
 
-  <!-- CATEGORY 4 -->
-  <div class="cat-label">// 04 — PRIVACY & DATA</div>
-
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggle(this)">
-      <div class="faq-q-left">
-        <span class="faq-num">Q.11</span>
-        <span class="faq-q-text">Does SHIELD access my private keys or seed phrase?</span>
-      </div>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p><strong>Absolutely not.</strong> SHIELD CryptoGuard never requests, reads, stores, or transmits your private keys, seed phrase, or any wallet credential. The extension operates exclusively on publicly visible data: URLs, smart contract addresses, on-chain transaction parameters, and token approval metadata that is already exposed to the browser environment at the moment of signing.</p>
-      <p>Any tool — browser extension or otherwise — that requests your seed phrase is attempting to steal your wallet. SHIELD will never ask for this information under any circumstance, and if you encounter a prompt claiming to be SHIELD requesting your seed phrase, you are looking at a phishing attack impersonating our product.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggle(this)">
-      <div class="faq-q-left">
-        <span class="faq-num">Q.12</span>
-        <span class="faq-q-text">What data does SHIELD collect and transmit when I use it?</span>
-      </div>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p>SHIELD operates on a strict <strong>minimal data collection principle</strong>. When a threat query is required, the extension transmits only the specific data point being evaluated — a domain string or a contract address — to SHIELD's backend API. This data is processed transiently for threat classification and is not stored as a persistent record linked to your identity.</p>
-      <p>SHIELD does not track your browsing history, does not build a behavioral profile, does not store your wallet address in our databases, and does not sell or share any user data with third parties for commercial purposes. Your subscription email (if you are a PRO user) is held by Stripe and is used exclusively for billing communications.</p>
-      <p>Full details are in our <a href="/privacy.html" style="color:var(--green);text-decoration:none;">Privacy Policy</a>.</p>
-    </div>
-  </div>
-
-  <!-- CATEGORY 5 -->
-  <div class="cat-label">// 05 — PLANS & SUBSCRIPTION</div>
-
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggle(this)">
-      <div class="faq-q-left">
-        <span class="faq-num">Q.13</span>
-        <span class="faq-q-text">What is the difference between the Free and PRO Shield plans?</span>
-      </div>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p>The <strong>Free tier</strong> provides essential phishing and domain protection, access to the public threat blacklist, and up to 5 smart contract analyses per day. It is suitable for occasional Web3 users who interact primarily with well-established protocols.</p>
-      <p>The <strong>PRO Shield</strong> plan ($9/month, 7-day free trial included) unlocks the full threat detection stack:</p>
-      <ul>
-        <li>Unlimited smart contract analyses via GoPlus Security API</li>
-        <li>Infinite approval interception and transaction firewall</li>
-        <li>Real-time alerts for rugpull risk, address poisoning, and malicious airdrop tokens</li>
-        <li>Access to the premium threat intelligence database updated every 6 hours</li>
-        <li>Priority threat verdict processing</li>
-      </ul>
-      <p>For anyone actively trading on DEXs, interacting with new protocols, or holding significant on-chain value, PRO Shield provides the full protection stack that the threat environment demands.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggle(this)">
-      <div class="faq-q-left">
-        <span class="faq-num">Q.14</span>
-        <span class="faq-q-text">Can I cancel my PRO subscription at any time?</span>
-      </div>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p>Yes. PRO Shield subscriptions can be cancelled at any time through your Stripe billing portal with no penalty and no lock-in period. Cancellation takes effect at the end of your current billing cycle — you retain full PRO access until that date. No questions asked, no retention flows, no dark patterns.</p>
-      <p>The 7-day free trial period will not be charged if cancelled before it expires.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggle(this)">
-      <div class="faq-q-left">
-        <span class="faq-num">Q.15</span>
-        <span class="faq-q-text">Does SHIELD guarantee I will never lose funds to a Web3 attack?</span>
-      </div>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p><strong>No — and any tool that makes this claim is being dishonest with you.</strong> The Web3 threat landscape evolves faster than any detection system can perfectly track. Novel attack architectures, zero-day contract exploits, and highly sophisticated social engineering campaigns may not be identified by SHIELD's current detection logic at the moment of first deployment.</p>
-      <p>What SHIELD provides is a <strong>significant and continuously improving reduction of the attack surface</strong> — covering the majority of threat categories that account for the overwhelming proportion of documented on-chain losses. It is a security layer, not a guarantee. The responsibility for due diligence, transaction verification, and safe key management always remains with you.</p>
-      <p>We say this not to diminish the value of the product, but because we believe users who understand the actual protection model make better decisions than users who believe they are fully invincible.</p>
-    </div>
-  </div>
-
-  <!-- CTA -->
   <div class="cta-box">
-    <div class="cta-title">Still have questions? <span>Read the full docs.</span></div>
-    <div class="cta-sub">
-      Our How It Works page covers the full 5-layer detection architecture in technical detail.<br>
-      Or install SHIELD and let the engine speak for itself.
-    </div>
-    <a href="/how-it-works.html" class="btn-primary" style="margin-right:12px;">// HOW IT WORKS</a>
-    <a href="https://buy.stripe.com/dRm14n35U2OO7DtcCcdjO00" class="btn-primary">🛡 TRY PRO FREE — 7 DAYS</a>
+    <div class="cta-title">Still have questions? <span>Write to us.</span></div>
+    <div class="cta-sub">contact@cryptoguard.site</div>
+    <a href="/contact.html" class="btn-primary" style="margin-right:12px;">// CONTACT</a>
+    <a href="https://buy.stripe.com/dRm14n35U2OO7DtcCcdjO00" class="btn-primary">TRY PRO FREE &mdash; 7 DAYS</a>
   </div>
 
 </main>
@@ -556,7 +438,6 @@ footer {
   <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
   <div class="footer-text">© 2026 Marbella Collins LLC (Florida, USA). SHIELD CryptoGuard.</div>
   <div class="footer-links">
-    <a href="/how-it-works.html">How It Works</a>
     <a href="/privacy.html">Privacy</a>
     <a href="/terms.html">Terms</a>
     <a href="/contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>

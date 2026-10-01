@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/features.html", "destination": "/#features", "permanent": true },
+    { "source": "/how-it-works.html", "destination": "/faq.html", "permanent": true }
+  ]
+}
