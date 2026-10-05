@@ -214,7 +214,7 @@ footer {
   <div class="doc-header">
     <div class="doc-tag">// LEGAL DOCUMENT</div>
     <h1 class="doc-title">Privacy <span>Policy</span></h1>
-    <div class="doc-meta">LAST UPDATED: FEBRUARY 2026 — VERSION 1.0</div>
+    <div class="doc-meta">LAST UPDATED: OCTOBER 2026 &mdash; VERSION 1.1</div>
     <div class="doc-meta">SHIELD CRYPTOGUARD — MARBELLA COLLINS LLC — FLORIDA, USA</div>
   </div>
 
@@ -233,7 +233,7 @@ footer {
       As a <strong>beta-stage product</strong>, SHIELD CryptoGuard may undergo significant changes to its architecture, data handling mechanisms, and feature set over time. Practices described in this policy reflect our current state and may be updated as the product matures. We will notify users of material changes by updating the "Last Updated" date above and, where feasible, through in-extension notices.
     </p>
     <p>
-      Furthermore, <strong>on-chain data — including your wallet address and any transaction you broadcast to a public blockchain — is permanently and publicly visible</strong> to anyone, by design. SHIELD CryptoGuard reads portions of this data to deliver its threat assessments, but we do not control the underlying protocols, cannot delete blockchain records, and are not responsible for the inherent transparency of decentralized networks.
+      Furthermore, <strong>on-chain data — including your wallet address and any transaction you broadcast to a public blockchain — is permanently and publicly visible</strong> to anyone, by design. The PRO contract check relies on on-chain data analyzed by GoPlus Security, but we do not control the underlying protocols, cannot delete blockchain records, and are not responsible for the inherent transparency of decentralized networks.
     </p>
   </div>
 
@@ -246,18 +246,45 @@ footer {
   </div>
 
   <div class="section">
-    <div class="section-num">02 — WHAT INFORMATION WE COLLECT</div>
-    <div class="section-title">Data We Receive From You</div>
-    <p>We operate on a minimal data collection philosophy. Depending on how you interact with SHIELD CryptoGuard, we may collect the following categories of information:</p>
+    <div class="section-num">02 &mdash; WHAT INFORMATION WE COLLECT</div>
+    <div class="section-title">What SHIELD Stores, Sends and Does Not Collect</div>
+    <p>This section lists exactly what the SHIELD CryptoGuard extension and our server handle.
+    Nothing else is collected.</p>
     <ul>
-      <li><strong>Account & subscription data:</strong> If you subscribe to the PRO plan, Stripe processes your payment. We receive only a confirmation of subscription status and a masked billing reference. We do not store your full card number or banking details in our systems.</li>
-      <li><strong>Email address:</strong> Collected only if you sign up for updates, support requests, or subscription management. Used exclusively for service communications. Never shared with third parties for marketing purposes.</li>
-      <li><strong>Extension usage signals:</strong> Anonymized, aggregated data about which threat categories are triggered (e.g., how many phishing alerts were generated) may be logged to improve detection accuracy. This data is not linked to your identity.</li>
-      <li><strong>Public wallet addresses:</strong> When you interact with a Web3 site while the extension is active, SHIELD CryptoGuard may read your publicly visible wallet address to perform threat assessments. This address is queried against security APIs (such as GoPlus Security) but is not stored persistently in our databases.</li>
-      <li><strong>URLs and smart contract addresses:</strong> The extension analyzes URLs and contract addresses you encounter to detect threats in real time. These are processed transiently for threat evaluation and are not retained as personally identifiable records.</li>
-      <li><strong>Technical metadata:</strong> Standard server logs may capture your IP address, browser type, and access timestamps when you interact with our backend API. This is used solely for security monitoring and abuse prevention, and is retained for a limited period.</li>
+      <li><strong>Stored only in your browser.</strong> The extension keeps one small record in
+      Chrome's local extension storage: the email address you log in with (if you log in), your plan
+      (Free or PRO), whether your subscription is active, the time of the last subscription check,
+      and two counters (pages checked and threats found). The counters never leave your browser.
+      Phishing checks and unlimited-approval warnings run entirely in your browser, against lists
+      built into the extension: the pages you visit and the transactions you sign are not sent to
+      us or to anyone else.</li>
+      <li><strong>Sent to GoPlus Security (PRO only).</strong> When you ask for a contract check in
+      the SHIELD popup, the extension sends the token contract address you pasted, and the network
+      (Ethereum), to the GoPlus Security API. It does not send your wallet address or your email
+      address. As with any web request, GoPlus can see your IP address.</li>
+      <li><strong>Sent to our server.</strong> If you log in, the extension sends your email
+      address to our server to check whether it has an active PRO subscription: when you log in,
+      when the extension starts, and every 30 minutes while you stay logged in. Our server keeps
+      your email address and the status of your PRO subscription, linked to the Stripe record of
+      that subscription. If you never log in, the extension sends nothing to our server.</li>
+      <li><strong>Payments.</strong> PRO is paid on a Stripe-hosted page operated for Marbella
+      Collins LLC. Your card details go directly to Stripe; they never pass through the extension
+      or our server.</li>
+      <li><strong>Technical logs.</strong> Like any web server, our server and its hosting provider
+      (Railway) may log the IP address, time and requested address of each request. For
+      subscription checks, the requested address includes your email address.</li>
+      <li><strong>Public list download.</strong> When it is installed or updated, the extension
+      requests a public list of phishing domains from GitHub. This request contains no personal
+      data.</li>
+      <li><strong>No telemetry or analytics in the extension.</strong> The extension contains no
+      analytics, telemetry or usage tracking. It does not send your wallet address, balances or
+      browsing history anywhere, and it never asks for private keys or seed phrases.</li>
+      <li><strong>Website.</strong> The cryptoguard.site home page uses Google Analytics and the
+      Google Ads tag to measure visits and ad conversions. See section 07.</li>
     </ul>
-    <p>We do not collect government-issued identification, social security numbers, biometric data, or any sensitive personal data beyond what is described above.</p>
+    <p>We do not collect government-issued identification, social security numbers, biometric
+    data, or any other sensitive personal data.</p>
+
   </div>
 
   <div class="section">
@@ -269,7 +296,6 @@ footer {
       <li>Manage your subscription and provide access to PRO features;</li>
       <li>Respond to support requests and resolve technical issues;</li>
       <li>Detect and prevent abuse, fraud, or misuse of the Service;</li>
-      <li>Improve the accuracy and coverage of our threat detection systems using aggregated, anonymized signals;</li>
       <li>Comply with applicable legal obligations under Florida and U.S. law.</li>
     </ul>
     <p>We do not use your data to build advertising profiles, serve targeted ads, or sell behavioral data to data brokers or marketing companies under any circumstances.</p>
@@ -286,7 +312,7 @@ footer {
       <li>Third-party security APIs we query (such as GoPlus Security) to perform threat analysis operate under their own privacy policies, which we encourage you to review;</li>
       <li>DeFi protocols, NFT platforms, and decentralized applications you interact with while using our extension are independent services with their own data practices, which are not governed by this Policy.</li>
     </ul>
-    <p>We read publicly available on-chain data to provide threat intelligence. We do not claim ownership of, and cannot delete, any information that exists natively on public blockchain networks.</p>
+    <p>The PRO contract check relies on on-chain data analyzed by GoPlus Security. We do not claim ownership of, and cannot delete, any information that exists natively on public blockchain networks.</p>
   </div>
 
   <div class="section">
@@ -295,7 +321,8 @@ footer {
     <p><strong>We do not sell your personal information.</strong> We do not share your data with third parties for advertising, marketing, or commercial profiling purposes. Limited data sharing occurs only in the following strictly necessary circumstances:</p>
     <ul>
       <li><strong>Stripe:</strong> Processes subscription payments. Operates under its own PCI-DSS compliant privacy framework. We receive only transaction confirmation and subscription status.</li>
-      <li><strong>Security API providers</strong> (e.g., GoPlus Security): Receive wallet addresses and contract addresses for threat analysis queries. These queries are necessary to deliver the core functionality of the extension.</li>
+      <li><strong>Security API providers</strong> (e.g., GoPlus Security): Receive only the token contract address you ask SHIELD PRO to check (never your wallet address or email). This query is necessary to deliver the PRO contract check.</li>
+      <li><strong>Google (Analytics and Ads):</strong> Receives website visit data from the cryptoguard.site home page through the tags described in section 07.</li>
       <li><strong>Infrastructure providers:</strong> Our backend runs on Railway (hosting). Standard infrastructure providers may process technical metadata as part of service delivery.</li>
       <li><strong>Legal requirements:</strong> We may disclose information if required to do so by a valid legal order, court ruling, or regulatory obligation under applicable Florida law or international legal cooperation frameworks. We will notify you where legally permissible.</li>
     </ul>
@@ -309,8 +336,8 @@ footer {
     <ul>
       <li>Subscription and billing records are retained for the duration of your active subscription plus any period required for legal and accounting compliance;</li>
       <li>Email addresses for support communications are retained until you request deletion or your account is closed;</li>
-      <li>Technical server logs are retained for a maximum of 90 days for security monitoring purposes, after which they are purged;</li>
-      <li>Threat analysis queries (URLs, wallet addresses passed to security APIs) are processed transiently and not retained in persistent storage on our systems.</li>
+      <li>Technical server logs are kept by our hosting provider (Railway) under its own retention settings;</li>
+      <li>Contract addresses sent to GoPlus are not stored on our systems, and the URLs you visit are never sent to us.</li>
     </ul>
     <p>Upon request, we will delete your personal information from our systems within a reasonable timeframe, subject to any legal retention obligations.</p>
   </div>
@@ -318,10 +345,14 @@ footer {
   <div class="section">
     <div class="section-num">07 — COOKIES & TRACKING</div>
     <div class="section-title">Website Tracking Practices</div>
-    <p>The SHIELD CryptoGuard website (cryptoguard.site) uses minimal tracking. We do not deploy advertising tracking pixels, behavioral analytics networks, or third-party retargeting cookies. The website may use:</p>
+    <p>The cryptoguard.site home page loads Google Analytics 4 and the Google Ads tag
+    (gtag.js). They may set cookies to measure visits and ad conversions, for example when a
+    visitor returns to the site after starting a PRO subscription. The other pages of the site
+    (FAQ, Contact, Privacy Policy, Terms) do not load these tags.</p>
     <ul>
-      <li><strong>Strictly necessary cookies:</strong> Required for basic website functionality and session management;</li>
-      <li><strong>Analytics:</strong> If basic, privacy-respecting analytics are used to understand traffic patterns, data is aggregated and anonymized and is not linked to individual users.</li>
+      <li><strong>Google Analytics 4:</strong> traffic statistics for the home page;</li>
+      <li><strong>Google Ads:</strong> measures whether visits from our ads lead to a PRO
+      subscription.</li>
     </ul>
     <p>The SHIELD CryptoGuard browser extension itself does not set cookies on the websites you visit. It reads page content and network requests solely to perform security analysis.</p>
   </div>
@@ -378,7 +409,7 @@ footer {
 <footer>
   <div class="footer-logo">🛡 SHIELD CRYPTOGUARD</div>
   <div class="footer-text">© 2026 Marbella Collins LLC (Florida, USA). SHIELD CryptoGuard.</div>
-  <div class="footer-text">Privacy Policy v1.0 — February 2026</div>
+  <div class="footer-text">Privacy Policy v1.1 &mdash; October 2026</div>
   <a href="/faq.html">FAQ</a>
     <a href="/contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       CONTACT
